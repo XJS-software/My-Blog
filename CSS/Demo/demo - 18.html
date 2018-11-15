@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+
+  <style>
+   *{
+     margin:0;
+	 padding:0;
+   }
+    .d1{
+	  display:inline-block;
+	  padding:10px;
+	  background-color:#000;
+	  margin:30px;
+	}    
+	.d2{
+	  width:200px;
+	  height:100px;
+	  background-color:red;
+	  float:left;
+	  color:#fff;
+	}
+
+    .d3{
+	  position:absolute;
+	  margin:30px;
+	  padding:10px;
+	  background-color:#000;
+	}    
+	.d4{
+	  width:200px;
+	  height:100px;
+	  background-color:blue;
+	  float:left;
+	  color:#fff;
+	}
+
+    .d5{
+	  float:left;
+	  margin:30px;
+	  padding:10px;
+	  background-color:#000;
+	}    
+	.d6{
+	  width:200px;
+	  height:100px;
+	  background-color:orange;
+	  float:left;
+	  color:#fff;
+	}
+
+  </style>
+
+ </head>
+ <body>
+  
+  <div class='d1'>   
+   <div class='d2'>我是浮动子元素,但是父元素设置 inline-block 其实被撑起来了。</div>
+  </div>
+  
+  <div class='d3'>   
+   <div class='d4'>我是浮动子元素,父元素 position:absolute 脱离文档流,也被我撑起来了.</div>
+  </div>
+
+  <div class='d5'>   
+   <div class='d6'>我是浮动子元素,父元素 float:left; 也浮动,被我撑起来了</div>
+  </div>
+
+
+ </body>
+</html>

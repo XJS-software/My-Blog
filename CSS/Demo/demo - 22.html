@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+
+  <style>
+   *{
+     margin:0;
+	 padding:0;
+   }
+    ul{
+	  list-style: none;
+	  overflow: hidden;
+
+	}
+	li{
+	  float: left;
+	  padding: 0 10px;
+	}
+  </style>
+
+ </head>
+ <body>
+   <p>ul 快速点击会使每个li 被选中</p>
+   <ul class="">
+		<li class="">111</li>
+		<li class="">222</li>
+		<li class="">333</li>
+		<li class="">444</li>
+		<li class="">555</li>
+   </ul>
+   <br><br>
+   <p></p>
+   <input type="button" value="消除快速点击多选的效果" onclick="addStyle()">
+   <script>
+      function addStyle()
+	  {
+		  var ulEle = document.getElementsByTagName('ul')[0];
+		  var pEle = document.getElementsByTagName('p')[1];
+		  ulEle.style.userSelect = 'none';
+		  pEle.innerText = 'ul.user-select:none';		  
+	  }
+   </script>
+ </body>
+ 
+</html>

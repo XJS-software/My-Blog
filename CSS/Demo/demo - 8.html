@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>行内元素 outline 描绘外框</title>
+
+  <style>
+   *{
+     margin:0;
+	 padding:0;
+   }
+   div.d1,.d2,.d3{
+     width:100px;
+	 height:100px;
+	 margin:50px;
+	 border:1px solid #000;
+   }
+   .d2,.d3{
+     text-align:center;
+   }
+   .d3{
+     width:400px;
+	 border:0;
+	 text-align:left;
+	 color:#fff;
+   }
+   .d3 span{
+     background-image:linear-gradient(to left,red 40%,blue 100%);
+	 color:transparent;
+   }
+    span{
+     outline:1px solid red;
+	 /* border:1px solid #00f; */
+   }
+
+   .d4{
+     width:600px;
+/* 	 height:100px; */
+	 margin:250px;
+	 border:0px solid #000;
+     
+   }
+   .d4 p{
+     display:inline-block;
+	 width:0;
+	 margin-left:50px;
+   }
+   .d4 p:before{
+     content:'Luky . ......... . Boby';
+     outline:1px solid transparent;
+	 background:red;
+	 border:1px solid transparent;
+	 border-radius:50%;
+	 line-height:2em;
+	 color:transparent;
+   }
+  </style>
+
+ </head>
+ <body>
+
+  <div class='d1'>
+    <span>这是一个span,这里由一段长长的话。</span>
+  </div>
+
+  <div class='d2'>
+    <span>这是一个span,这里由一段长长的话。</span>
+  </div>
+  <!-- 
+  <div class='d3'>
+    <span>-<br>--<br>---<br>----<br>-----<br>-----<br>-----<br>-------<br>`<br>&nbsp;<br>|</span>
+  </div> -->
+  
+  <div class='d3'>
+    <span>
+	.<br>
+	..<br>
+	....<br>
+	......<br>
+	........<br>
+	...........<br>
+	..............<br>
+	..................<br>
+	.......................<br>
+	.................................<br>
+	</span>
+  </div>
+
+  <div class='d4'>
+    <p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+  </div>
+
+ </body>
+</html>

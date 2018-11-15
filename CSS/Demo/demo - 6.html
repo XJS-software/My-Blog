@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>首选最小宽度</title>
+
+  <style>
+   *{
+     margin:0;
+	 padding:0;
+   }
+   .d1{
+     width:0;
+	 border:1px solid #000;
+	 margin:20px 100px;
+     /* outline:1px solid #f00; */
+   }
+   .d1 span{
+     outline:1px solid red;
+   }
+
+   .p1{
+     width:0;
+	 display:inline-block;
+     border:1px solid #000;
+	 margin:20px 100px;
+   }
+   .p1 a{
+     outline:1px solid #f00;
+   }
+   .p2{
+     width:0;
+	 display:inline-block;
+     /* border:1px solid #000; */
+	 margin:20px 100px;
+   }
+   .p2:after{
+     content:'我Love你';
+	 /* 这里设置那么无预期效果 */ 
+	 /* display:block; */   
+     
+	 /* 加轮廓就会显示出图形 */
+	 /* outline:1px solid #f00; */  
+
+	 /* 加外框可以明显看出截断 */
+     border:1px solid #000;
+	 color:#000;
+   }
+
+   .p3{
+     width:0;
+	 display:inline-block;     
+	 margin:20px 100px;
+   }
+   .p3:before{
+     content:'我Love你';
+	 outline:1px solid #f00;  
+	 color:#000;
+   }
+
+  </style>
+
+ </head>
+ <body>
+
+   <div class='d1'>
+     <span>这里是Span哟</span>
+   </div>
+
+   <p class='p1'>
+      <a href='#'>这里也是aaaaaa哟</a>
+   </p>
+   
+   <p class='p2'></p>
+
+   <p class='p3'></p>
+
+
+
+
+
+
+ </body>
+</html>

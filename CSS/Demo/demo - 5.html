@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>inline-block 宽度包裹</title>
+  <style>
+   .box{
+     width:200px;
+	 background:#c00;
+	 text-align:center;
+	 margin-top:20px;
+	 padding:0 10px;
+   }
+   .box1{
+     width:200px;
+	 background:#c00;
+	 margin-top:20px;
+	 padding:0 10px;
+   }
+   .content{
+     display:inline-block;
+	 text-align:left;
+	 color:#fff;
+   }
+   span{
+     text-align:center;
+   }
+  </style>
+ </head>
+ <body>
+  <div class='box'>
+    <p class='content'>文字内容</p>
+  </div>  
+  <div class='box'>
+    <p class='content'>文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容</p>
+	<span>一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字span span span span span span </span>
+	<span></span>
+  </div>
+  <div class='box1'>
+    <p class='content1'>文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容</p>
+	<span>一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字一段文字span span span span span span </span>
+	<!-- <span>笑笑笑笑</span> -->
+  </div>
+ </body>
+</html>

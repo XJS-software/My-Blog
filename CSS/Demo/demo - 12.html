@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+
+  <style>
+   *{
+     margin:0;
+	 padding:0;
+   }
+   div{
+     text-align:center;
+	 color:#999;
+   }
+    html,body{
+	  height:100%;
+	}
+    body{
+	  background-color:#aaa;
+	}
+    div.d1{
+	  height:100%;
+	  width:50%;
+      background-color:#a00;
+	}
+    div.d2{
+	  /* 这里可以生效 */
+	  /* height:100%; */  
+      background-color:#0a0;	  
+	}
+	div.d3{
+	  height:100px;
+	  width:50%;
+      background-color:#00a;	
+	}
+   	div.d4{
+	  height:100%;
+	  width:50%;
+      background-color:#000;	
+	}
+    
+   	div.d5{	  
+      background-color:#0ff;
+	  position:relative;
+	}
+   	div.d6{
+	  height:100px;
+	  width:50%;
+      background-color:#ff0;	
+	}
+   	div.d7{
+	  height:100%;
+	  width:50%;
+	  position:absolute;
+      background-color:#000;	
+	}
+  
+  </style>
+
+ </head>
+ <body>
+<!--  1.  html / body 设置 height:100% ,此时可以设置 d1 height:100% -->
+   <div class='d1'></div>
+   
+   <div class='d2'>
+     <div class='d3'></div>   
+<!--  2. d4设置 height:100% 不会生效,即使父元素 d2 已经被 d3 撑开 -->
+	 <div class='d4'></div>   
+   </div>
+
+<!--    为 d5 设置相对定位属性,作为 d7 高度的参考 -->
+   <div class='d5'>d5
+     <div class='d6'>d6</div>  
+<!-- 	 为 d7 设置绝对定位,可以获得 d5 的高度 -->
+	 <div class='d7'>d7</div>   
+   </div>
+   
+
+
+ </body>
+</html>

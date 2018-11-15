@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+
+  <style>
+   *{
+     margin:0;
+	 padding:0;
+   }
+   div.box1 div{
+     width:100px;
+	 height:100px;
+	 float:left;
+	 border:1px solid #000;
+	 margin:10px;
+   }
+   .box1 .d3{
+/*      设置 clear:left / both 二者效果相同.但是 right 没有小效果 */
+     /* clear:left; */
+	 /* clear:right; */
+	 clear:both;
+   }
+
+   div.box2 div{
+     width:100px;
+	 height:100px;
+	 float:right;
+	 border:1px solid #000;
+	 margin:10px;
+   }
+   .box2 .d3{
+/*      设置 clear:right / both 二者效果相同.但是 left 没有小效果 */
+     /* clear:left; */
+	 /* clear:right; */
+	clear:both;
+   }
+
+	hr{
+	  clear:both;
+	}
+
+   div.box3 div{
+     width:100px;
+	 height:100px;
+	 float:left;
+	 border:1px solid #000;
+	 margin:10px;
+   }
+   .box3 .d3{
+     /* 这里设置 clear:both; 属性和 clear:left; 效果一样 */
+     /* clear:left; */
+	 /* clear:right; */
+	 clear:both;
+   }
+   .box3 .d4{
+     float:right;
+   }
+
+  </style>
+
+ </head>
+ <body>
+  <div class='box1'>
+   <div class='d1'>1</div>
+   <div class='d2'>2</div>
+   <div class='d3'>3</div>
+   <div class='d4'>4</div>
+   <div class='d5'>5</div>
+   <div class='d6'>6</div>
+   <div class='d7'>7</div>
+   <div class='d8'>8</div>
+   <div class='d9'>9</div>
+   <div class='d10'>10</div>
+   </div>
+ <hr>
+ <div class='box2'>
+   <div class='d1'>1</div>
+   <div class='d2'>2</div>
+   <div class='d3'>3</div>
+   <div class='d4'>4</div>
+   <div class='d5'>5</div>
+   <div class='d6'>6</div>
+   <div class='d7'>7</div>
+   <div class='d8'>8</div>
+   <div class='d9'>9</div>
+   <div class='d10'>10</div>
+ </div>
+ <hr>
+ <div class='box3'>
+   <div class='d1'>1</div>
+   <div class='d2'>2</div>
+   <div class='d3'>3</div>
+   <div class='d4'>4</div>
+   <div class='d5'>5</div>
+   <div class='d6'>6</div>
+   <div class='d7'>7</div>
+   <div class='d8'>8</div>
+   <div class='d9'>9</div>
+   <div class='d10'>10</div>
+ </div>
+
+ </body>
+</html>

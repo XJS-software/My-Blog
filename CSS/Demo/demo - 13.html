@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>清除浮动想法与思考</title>
+
+  <style>
+   *{
+     margin:0;
+	 padding:0;
+	 box-sizing:border-box;
+   }
+   .d1{
+     background-color:red;
+	 /* overflow:hidden; */
+	 border:2px solid #0f0;
+   }
+   .d2,.d3,.d4,.d5{
+     width:25%;;
+	 height:300px;
+	 /* float 元素的 margin 不会合并 */
+	 /* margin:40px; */
+	 float:left;
+	 border:1px solid #000;
+   }
+  </style>
+
+ </head>
+ <body>
+   
+   <div class='d1'>
+     <div class='d2'></div>
+	 <div class='d3'></div>
+	 <div class='d4'></div>
+	 <div class='d5'></div>
+	 <span>文本内容不能被div 覆盖。由于浮动div占满一行,无法显示 span 文本.只好显示在各div 下面。因而将父元素撑开。这种方法的问题是,只有上面有空,这里的文字都会向上走。</span>
+   </div>
+  
+
+
+
+ </body>
+</html>

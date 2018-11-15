@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+
+  <style>
+   *{
+     margin:0;
+	 padding:0;
+   }
+   /* 方法一 */
+   .d1{
+		width: 800px;
+		height: 300px;
+		position: relative;
+		background-color: red;
+   }
+   .d2{
+		width: 200px;
+		height: 200px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -100px;
+		margin-left: -100px;
+		background-color: blue;
+   }
+   /* 方法二 */
+   /* 下面这种方法适合设置位置子元素长宽的情况 */
+   .d3{
+		width: 800px;
+		height: 300px;
+		position: relative;
+		background-color: red;
+   }
+   .d4{
+		width: 200px;
+		height: 200px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		background-color: blue;
+   }
+
+   /* 方法三 */
+   /* 下面这种方法适合设置位置子元素长宽的情况 */
+   .d5{
+		width: 800px;
+		height: 300px;
+		position: relative;
+		background-color: red;
+   }
+   .d6{
+		width: 200px;
+		/* height: 200px;  */
+        /* 不为之设置高度,高度将自动填满父元素.是因为 margin 在 height 方向上是默认为0的吗 */
+		margin: auto;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;		
+		background-color: blue;
+   }
+
+   /* 方法四 */
+   /* flex-box */
+	.d7{
+		width: 800px;
+		height: 300px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: red;
+   }
+   .d8{
+		width: 200px;
+		height: 200px;
+		background-color: blue;
+   }
+  </style>
+
+ </head>
+ <body>
+	<div class="d1">
+		<div class="d2"></div>
+	</div>  
+	<br>
+	<div class="d3">
+		<div class="d4"></div>
+	</div>  
+	<br>
+	<div class="d5">
+		<div class="d6">
+			
+		</div>
+	</div> 
+	
+	<br>
+	<div class="d7">
+		<div class="d8">
+			
+		</div>
+	</div> 
+ </body>
+</html>
