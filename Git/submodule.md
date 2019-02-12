@@ -1,4 +1,5 @@
 <a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97">Git 教程 - 子模块</a>
+
 #### 1. 开始使用子模块
 - 将一个已存在的 Git 仓库添加为正在工作的仓库的子模块。
 > git submodule add https://github.com/jinshan-xu/JS.git (子模块项目 URL)
@@ -11,8 +12,10 @@
 - 使用如下两条命令来抓取子模块的提交
 > git submodule init </br>
 > git submodule update
-- 或者使用简洁方式，克隆主项目时添加参数 --recursive
+- 或者使用简洁方式,以递归的方式克隆整个项目,克隆主项目时添加参数 --recursive
 > git clone --recursive https://github.com/jinshan-xu/My-Blog.git 
+- 遍历子模块，拉取所有子模块上的更新
+> git submodule foreach git pull
 
 #### 3. 子模块拉取上游修改
 - 在子模块中查看最新工作，可以进入子模块目录先后运行
