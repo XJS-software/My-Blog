@@ -141,6 +141,20 @@
 
 ---
 #### 11. Git 查看提交历史
-
+- 查看提交历史的详细信息
+> git log </br>
+- -p 查看每次提交内容的差异, -2 查看最近两次提交
+> git log -p -2 
+- --stat 每次提交的简要统计信息
+> git log --stat
+- --pretty 可以指定使用不同于默认格式的方式提交历史。一些内建的子选项如，oneline / short / full / fuller ，展示的信息各有不同。
+> git log --pretty=oneline
+- --oneline 以一行简短信息查看提交历史
+> git log --oneline
+- --pretty=format:"%h - %an, %ar : %s" 定制显示的格式(格式列表请查看[git-book-历史](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2))
+> git log --pretty=format:"%h - %an, %ar : %s"
+- --graph 以 ASCII 图形方式表示分支的合并历史
+> git log --pretty=format:"%h %s" --graph
+- 限制 Git 输出的选项，如 -<n> / --since / --after / --S ... (详见[Git 提交历史](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2))
 ---
 #### 12. Git 撤销操作
