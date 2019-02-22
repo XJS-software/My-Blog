@@ -138,6 +138,9 @@ Changes not staged for commit:
 #### __. Git 分支
 
 #### __. Git 撤销操作
+1. 重新提交. 
+> git commit --amend
+
 
 #### __. Git 远程仓库
 
