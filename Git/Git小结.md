@@ -103,26 +103,63 @@ Changes not staged for commit:
 
 5. 自定义配置
 
-   5.1. 格式化多余的空白字符 git config --global core.autocrlf true 
+   5.1. Linux | Mac 与 windows 的行结束符不同。在不同平台提交代码时,提交时将 crlf 转换为 lf, 检出代码时将 lf 转换为 crlf。(代码仅运行在 windows 系统可以设置为 false ) </br>
+   git config --global core.autocrlf true 
         
 
 6. 查看帮助
 > git help < verb > 无需联网可以查看详细帮助手册
 
-#### 4. Git 提交   
+#### __. Git 创建与获取项目
+1. 创建项目--将一个目录变成一个 Git 仓库
+> git init 
 
-#### 4. Git 对比文件差异
+2. 克隆项目 
 
-#### 5. Git 删除/移动文件
+   1. git clone [ url ] < repoName >
+   
+   2. Git 克隆的是该 Git 仓库服务器上的几乎所有数据，而不是仅仅复制完成你的工作所需要文件。 当执行 git clone 命令的时候，默认配置下远程 Git 仓库中的每一个文件的每一个版本都将被拉取下来。
 
-#### 4. Git 对比文件差异
+   3. git clone 实际上是一个封装了其他几个命令的命令：1). 创建并进入目录； 2). git init 初始化 Git 仓库； 3). 为你指定的 URL 添加一个（默认名称为 origin 的）远程仓库（git remote add）； 4). 再针对远程仓库执行 git fetch； 5).最后通过 git checkout 将远程仓库的最新提交检出到本地的工作目录。
 
-#### 4. Git 查看文件历史
+#### __. Git 提交  
+1. git commit -m "提交的简短说明"
+> 不带 -m 会启动文本编辑器输入本次提交的说明( 一般是 vim )。
+2. git commit -a -m "提交的简短说明"
+> 自动将所有已经跟踪过的文件暂存起来一起提交。
+3.  
 
-#### 4. Git 分支
+#### __. Git 对比文件差异
 
-#### 4. Git 撤销操作
+#### __. Git 删除/移动文件
 
-#### 4. Git 钩子
+#### __. Git 查看文件历史
 
-#### 4. Git 子模块
+#### __. Git 分支
+
+#### __. Git 撤销操作
+
+#### __. Git 远程仓库
+
+#### __. Git 钩子
+
+#### __. Git 交互式暂存
+- 当你修改一组文件后，希望这些改动能放到若干提交而不是混杂在一起成为一个提交时，使用 Git 自带的工具会比较有用。
+- 进入交互式终端模式
+> git add -i 
+```
+$ git add -i
+           staged     unstaged path
+  1:    unchanged        +0/-1 TODO
+  2:    unchanged        +1/-1 index.html
+  3:    unchanged        +5/-1 lib/simplegit.rb
+
+*** Commands ***
+  1: status     2: update      3: revert     4: add untracked
+  5: patch      6: diff        7: quit       8: help
+What now>
+```
+
+#### __. Git 子模块
+
+#### __. Git 常用操作
