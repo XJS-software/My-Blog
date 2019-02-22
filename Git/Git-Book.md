@@ -197,3 +197,10 @@
 #### 14. Git checkout 命令
 [git checkout](https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-checkout.html#_examples)
 
+#### 15. Git add  
+- git add  __  < fileSpec > 将指定文件加入到暂存区。
+- < fileSpec > 文件名 | 目录 | 通配符 
+- -u ( --update ) 将所有被删除和修改的文件加入到暂存区
+- -A ( --all ) 将所有被删除、修改、新建文件加入到暂存区
+- -f ( --force) 允许添加 .gitignore 中的文件
+- -n ( --dry-run ) 不会提交到暂存区，仅查看是否存在，或者是否被忽略。
