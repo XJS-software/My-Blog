@@ -1,4 +1,21 @@
-[Git Book学习](https://git-scm.com/book/zh/v2)
+[Git Book学习](https://git-scm.com/book/zh/v2)</br>
+[The Git Parable](http://tom.preston-werner.com/2009/05/19/the-git-parable.html)</br>
+[Git命令](https://mirrors.edge.kernel.org/pub/software/scm/git/docs/)
+---
+#### 0. 心得总结
+1. mster / dev / HEAD 表示的意义 </br>
+   1.1 仅仅只是指针，指向不同的提交版本。 master / dev 都指代不同的分支名以帮助区分。HEAD指向当前的提交对象，决定了当前使用哪个提交对象。</br>
+   1.2 HEAD 是一个对当前检出记录的符号引用，也就是指向你正在其基础上进行工作的提价记录。可以通过 cat .git/HEAD | git symbolic-ref HEAD 查看 HEAD 的指向。正常情况下，HEAD 指向分支名而不是具体的提交记录，分支名指向具体提交记录。
+   1.3 当 master / dev 进行切换分支时，HEAD 分支随之自动切换，才会让我们使用不同的提交对象。</br>
+   1.4 当手动切换 HEAD 的指向时，当前使用的提交对象随之改变。
+   1.5 分支名可以认为是指向此分支最新提交的一个指针。
+
+2. 为什么说 Git 每次提交时都只提交了文件快照，什么是快照？ </br>
+   1.1 每次提交时，Git 都会将完整的文件提交为一个新的提交对象，并为之建立索引。(内部是否有比较算法判断文件是否修改暂未了解，此部分需要后续研究。)
+   1.2 正是因为每次提交都将整个文件进行提交，所以 Git 在切换分支，撤销操作，等非常快速。
+
+
+
 ---
 #### 1. 知识点速记
 - Git 命令别名
@@ -131,13 +148,18 @@
 
 - 准则是：不要对在你的仓库之外有副本的分支执行变基操作！
 ---
-#### 10. Git 移动
+#### 10. HEAD / master 在 Git 提交树上的移动
+##### 1. 移动 HEAD
 - ^ 在当前分支相对向上移动一位
 - ~<num> 在当前分支相对向上移动 num 位
-> git checkout HEAD^ </br>
-> git checkout HEAD~2
+> **git checkout HEAD^** </br>
+> **git checkout HEAD~2**
 
-- git branch -f master HEAD~3 强制使 master 分支移动到当前 HEAD 的前 3 次提交。
+##### 2. 移动 master 
+- 强制使 master 分支移动到某提交对象
+> **git branch -f master C2**
+- 强制使 master 分支移动到 HEAD 前 n 次提交
+> **git branch -f master HEAD~n**
 
 ---
 #### 11. Git 查看提交历史
@@ -157,4 +179,21 @@
 > git log --pretty=format:"%h %s" --graph
 - 限制 Git 输出的选项，如 -<n> / --since / --after / --S ... (详见[Git 提交历史](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2))
 ---
-#### 12. Git 撤销操作
+#### 12. Git 撤销变更
+- git reset 将分支记录回退几个提交记录实现撤销更改。这种更改可以修改本地仓库。
+> git reset HEAD~1
+
+- git **revert** 将提交一个更改，这些更改就是撤销了上一个提交的。revert 可以修改远程分支。
+> git revert HEAD
+---
+#### 13. git diff 对比差异
+- 对比当前工作区与暂存区之间的差异
+> git diff
+- 暂存区与最后提交之间的差异
+> git diff --staged
+- 连个提交记录之间的差异
+> git diff master dev / git diff c1 c2
+---
+#### 14. Git checkout 命令
+[git checkout](https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-checkout.html#_examples)
+
