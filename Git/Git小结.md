@@ -139,7 +139,16 @@ Changes not staged for commit:
 
 #### __. Git 撤销操作
 1. 重新提交. 
-> git commit --amend
+
+   1.1 若是自上次提交之后暂存区未改动，此命令仅仅会改变提交信息
+   > git commit --amend -m "xxx"
+
+   1.2 若是第一次提交之后发现有部分文件忘记提交，此命令就会只有一个提交，后一次将覆盖前一次。例如：
+   > git commit -m '第一次提交, 但是忘记提交某文件' </br>
+   > git add forgotten_file 继续操作 </br>
+   > git commit --amend -m '再次提交，此次提交将会覆盖上一次提交。提交记录仅有本次'
+
+  
 
 
 #### __. Git 远程仓库
