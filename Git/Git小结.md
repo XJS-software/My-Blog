@@ -122,21 +122,172 @@ Changes not staged for commit:
 
    3. git clone 实际上是一个封装了其他几个命令的命令：1). 创建并进入目录； 2). git init 初始化 Git 仓库； 3). 为你指定的 URL 添加一个（默认名称为 origin 的）远程仓库（git remote add）； 4). 再针对远程仓库执行 git fetch； 5).最后通过 git checkout 将远程仓库的最新提交检出到本地的工作目录。
 
-#### __. Git 提交  
+**图4.** 工作目录、暂存区域以及 Git 仓库
+
+#### __. Git commit  
 1. git commit -m "提交的简短说明"
 > 不带 -m 会启动文本编辑器输入本次提交的说明( 一般是 vim )。
 2. git commit -a -m "提交的简短说明"
 > 自动将所有已经跟踪过的文件暂存起来一起提交。
-3.  
 
 #### __. Git 对比文件差异
 
+
 #### __. Git 删除/移动文件
 
-#### __. Git 查看文件历史
-
+---
 #### __. Git 分支
+1. 提交对象
+> 在进行提交操作时，Git 会保存一个提交对象（commit object）。知道了 Git 保存数据的方式，我们可以很自然的想到——该提交对象会包含一个指向暂存内容快照的指针。 但不仅仅是这样，该提交对象还包含了作者的姓名和邮箱、提交时输入的信息以及指向它的父对象的指针。首次提交产生的提交对象没有父对象，普通提交操作产生的提交对象有一个父对象，而由多个分支合并产生的提交对象有多个父对象。</br>
+> 每次提交产生的提交对象形式如下（假设只有三个文件）：
+![提交对象](https://git-scm.com/book/en/v2/images/commit-and-tree.png)
+*三个 blob 对象（保存着文件快照）、一个树对象（tree）（记录着目录结构和 blob 对象索引）以及一个提交对象（commit）（包含着指向前述树对象的指针和所有提交信息）。*
 
+2. 提交对象树
+> 多次提交后产生提交对象树：
+![提交对象及其父对象](https://git-scm.com/book/en/v2/images/commits-and-parents.png)
+
+3. 分支
+> Git 的分支，其实本质上仅仅是指向提交对象的可变指针, Git 的默认分支名字是 master，它会在每次的提交操作中自动向前移动。</br>
+> Git 有一个名为 HEAD 的特殊指针，文件是一个符号引用，指向当前所在的本地分支，是一个指向其他引用的指针。</br>
+> 
+![git 分支](https://git-scm.com/book/en/v2/images/branch-and-history.png)
+
+4. 创建分支
+> git branch testing | git checkout testing 创建以及检出分支</br>
+> git checkout -b testing 等价于上者</br>
+![切换分支](https://git-scm.com/book/en/v2/images/head-to-testing.png)
+
+5. 在当前分支提交
+> git commit -m "xxx" </br>
+![提交](https://git-scm.com/book/en/v2/images/advance-testing.png)
+*提交时，HEAD分支将会随着提交自动向前移动*
+
+6. 检出分支
+> git checkout master </br>
+![检出分支](https://git-scm.com/book/en/v2/images/checkout-master.png)
+> 这条命令做了两件事。 一是使 HEAD 指回 master 分支，二是将工作目录恢复成 master 分支所指向的快照内容。</br>
+> 检出操作实质只是改变了 HEAD 分支的指向，所以操作非常迅速。</br>
+> 注意：在切换分支时，一定要注意你工作目录里的文件会被改变。
+
+7. 提交产生分叉
+> git commit -m "xxx" 对文件作出修改，并提交。</br>
+![产生分叉的提交历史](https://git-scm.com/book/en/v2/images/advance-master.png)
+
+8. 分支管理
+> git branch 查看分支列表。</br>
+> git branch -v 查看每一个分支最后一次提交。</br>
+> git branch --merged 查看哪些分支已经合并到当前分支。</br>
+> git branch --no-merged 查看所有包含未合并工作的分支。</br>
+
+9. 删除分支
+> git branch -d [ branName ] </br>
+> git branch -D [ branName ] 强制刪除</br> 
+
+10. 分支合并
+- 快进合并( fast-forward )
+> 当试图合并两个分支时，如果顺着一个分支走下去能够到达另一个分支，那么 Git 在合并两者的时候，只会简单的将指针向前推进（指针右移），因为这种情况下的合并操作没有需要解决的分歧——这就叫做 “快进（fast-forward）” </br>
+![拥有三个分支的Git仓库](https://git-scm.com/book/en/v2/images/basic-branching-4.png)
+> git checkout master </br>
+> git merge hotfix </br>
+![快进合并](https://git-scm.com/book/en/v2/images/basic-branching-5.png)
+> </br>
+
+- 三方合并
+> 当开发历史从一个更早的地方开始分叉开来（diverged），Git 会使用两个分支的末端所指的快照（C4 和 C5）以及这两个分支的工作祖先（C2），做一个简单的三方合并。
+![分叉的提交历史](https://git-scm.com/book/en/v2/images/basic-merging-1.png)
+> git checkout master </br>
+> git merge iss53 </br>
+![三方合并](https://git-scm.com/book/en/v2/images/basic-merging-2.png)
+
+11. 遇到冲突时的分支合并
+> 有时候合并操作不会如此顺利。 如果你在两个不同的分支中，对同一个文件的同一个部分进行了不同的修改，Git 就没法干净的合并它们，而产生冲突。</br>
+> 可以在合并冲突后的任意时刻使用 git status 命令来查看那些因包含合并冲突而处于未合并（unmerged）状态的文件：</br>
+```
+$ git status
+On branch master
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+
+    both modified:      index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+> Git 会在有冲突的文件中加入标准的冲突解决标记，这样你可以打开这些包含冲突的文件然后手动解决冲突。</br>
+```
+<<<<<<< HEAD:index.html
+<div id="footer">contact : email.support@github.com</div>
+=======
+<div id="footer">
+ please contact us at support@github.com
+</div>
+>>>>>>> iss53:index.html
+
+```
+> 在你解决了所有文件里的冲突之后，对每个文件使用 *git add* 命令来将其标记为冲突已解决。 一旦暂存这些原本有冲突的文件，Git 就会将它们标记为冲突已解决。之后通过 *git commit* 完成提交。</br>
+
+12. 变基
+- 引入某分支的所有修改到另一个分支上，叫做变基。
+> git checkout experiment </br>
+> git rebase master </br>
+> 等价于 git rebase master experiment -> git rebase [basebranch] [topicbranch]
+![通过 merge 操作整合分叉的历史](./images/basic-rebase-2.png)
+![通过变基整合分叉历史](./images/basic-rebase-3.png)
+
+- 原理是：找到两分支的最近共同祖先，对比当前分支对应此祖先的多次历史提交，提取相应的修改存为临时文件。然后将当前分支指向目标基底 (C3)。最后据此将之前的临时文件的修改依序应用。
+![master分支的快进合并](./images/basic-rebase-4.png)
+
+- 好处是：确保在向远程分支推送时能保持提交历史记录的整洁。
+
+- 更加复杂的变基例子
+![从一个分支中再分出一个特性分支的提交历史](./images/interesting-rebase-1.png)
+
+> git checkout client </br>
+> git rebase --onto master server client
+![截取特性分支上的另一个特性分支，然后变基到其他分支](./images/interesting-rebase-2.png)
+
+> git checkout master </br>
+> git merge client
+![快进合并 master 分支](./images/interesting-rebase-3.png)
+
+> git rebase master server
+![将server分支的修改变基到master分支](./images/interesting-rebase-4.png)
+
+> git checkout master </br>
+> git merge server </br>
+> git branch -d server </br>
+> git branch -d client </br>
+![删除另外两个分支之后的最终版本](./images/interesting-rebase-5.png)
+
+- 准则是：不要对在你的仓库之外有副本的分支执行变基操作！
+
+13. HEAD / master 等分支在 Git 提交树上的移动
+1. 移动 HEAD
+- ^ 在当前分支相对向上移动一位
+- ~<num> 在当前分支相对向上移动 num 位
+> **git checkout HEAD^** </br>
+> **git checkout HEAD~2**
+
+2. 移动 master 等分支
+- 强制使 master 分支移动到某提交对象
+> **git branch -f master C2**
+- 强制使 master 分支移动到 HEAD 前 n 次提交
+> **git branch -f master HEAD~n**
+
+-. 远程分支
+- 远程引用
+> 远程引用是对远程仓库的引用（指针），包括分支、标签等等。 </br>
+> git ls-remote 显式地获得远程引用的完整列表。</br>
+> git remote show 获得远程分支的更多信息。</br>
+- 远程跟踪分支
+> 远程跟踪分支是远程分支状态的引用。以 *(remote)/(branch)* 形式命名。它们是你不能移动的本地引用，当你做任何网络通信操作时，它们会自动移动。 远程跟踪分支像是你上次连接到远程仓库时，那些分支所处状态的书签。
+- to be continued ...
+
+
+---
 #### __. Git 撤销操作
 1. 重新提交. 
 
@@ -148,13 +299,89 @@ Changes not staged for commit:
    > git add forgotten_file 继续操作 </br>
    > git commit --amend -m '再次提交，此次提交将会覆盖上一次提交。提交记录仅有本次'
 
-  
+2. 取消暂存的文件( unstage )   
+> git reset HEAD < file > </br>
+*关于 reset 更多信息将在 重置 中讲述* 
 
+3. 撤销对文件的修改
+> git checkout -- < file > 这个命令会丢失当前文件的全部修改，谨慎使用。
+---
+#### __. Git 重置 [源文档](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86#r_git_reset)
+- Git 的三个工作区
 
-#### __. Git 远程仓库
+   1. HEAD
+  > HEAD 是当前分支引用的指针，它总是指向该分支上的最后一次提交。 这表示 HEAD 将是下一次提交的父结点。 通常，理解 HEAD 的最简方式，就是将它看做 你的上一次提交 的快照
 
+   2. index (暂存区)
+   > 索引是你的 预期的下一次提交。 我们也会将这个概念引用为 Git 的 **“暂存区域”**，这就是当你运行 git commit 时 Git 看起来的样子。
+
+   3. Working Directory
+   > 以上两个工作区以一种高效但并不直观的方式，将它们的内容存储在 .git 文件夹中。 工作目录会将它们解包为实际的文件以便编辑。 你可以把工作目录当做 沙盒。在你将修改提交到暂存区并记录到历史之前，可以随意更改。（reset 命令实质是在操作 Git 的三棵树）
+![工作目录、暂存区域（index）以及 Git 仓库](https://git-scm.com/book/en/v2/images/reset-workflow.png)
+
+- Git reset
+1. git reset --soft HEAD~
+> reset 做的第一件事是移动 HEAD 的指向。它本质上是撤销了上一次 git commit 命令。--soft 不会更新索引。
+
+![](https://git-scm.com/book/en/v2/images/reset-soft.png)
+
+2. git reset HEAD~ | git reset --mixed HEAD~
+> 依然会撤销一上次 提交，但还会 取消暂存 所有的东西。 于是，我们回滚到了所有 git add 和 git commit 的命令执行之前。
+![](https://git-scm.com/book/en/v2/images/reset-mixed.png)
+
+3. git reset --hard HEAD~
+> 撤销了最后的提交、git add 和 git commit 命令以及工作目录中的所有工作。
+![](https://git-scm.com/book/en/v2/images/reset-hard.png)
+
+4. 小结：
+> 1. reset --soft 移动了 HEAD 分支的指向。等于撤销最后一次 commit </br>
+> 2. reset 将索引区变得和 HEAD 区一样 </br>
+> 3. reset --hard 将工作区变得和索引区一样(此命令包含上面一个命令的效果) </br>
+**此过程刚好与提交过程相逆：** </br>
+> 4. git add 使索引区变得和工作区一样 </br>
+> 5. git commit 使 HEAD 区变得和索引区一样 </br>
+
+5. **reset 会移动 HEAD 分支的指向：** 假设我们有 master 和 develop 分支，它们分别指向不同的提交；我们现在在 develop 上（所以 HEAD 指向它）。 如果我们运行 git reset master，那么 develop 自身现在会和 master 指向同一个提交。
+
+6. 通过路径来重置
+> 若指定了一个路径，reset 将会跳过第 --soft 步骤，并且将它的作用范围限定为指定的文件或文件集合。 </br>
+> git reset file.txt === git reset --mixed HEAD file.txt </br> 
+*以上命令正是 git add 命令的逆命令*
+
+---
+#### __. Git checkout
+- checkout 也会操作三棵树 </br>
+1. checkout 命令不带路径：
+
+   1.1 我们有 master 和 develop 分支，它们分别指向不同的提交；我们现在在 develop 上（所以 HEAD 指向它）。我们运行 *git checkout master* 的话，develop 不会移动，HEAD 自身会移动。 现在 HEAD 将会指向 master。我们运行 *git reset master*，那么 develop 自身现在会和 master 指向同一个提交。
+   ![二者区别](https://git-scm.com/book/en/v2/images/reset-checkout.png)
+
+2. checkout 命令带路径：
+ 
+   2.1 运行 checkout 的另一种方式就是指定一个文件路径，这会像 reset 一样不会移动 HEAD。 它就像 git reset [ branch ] file 那样用该次提交中的那个文件来更新索引，但是它也会覆盖工作目录中对应的文件。 它就像是 git reset --hard [ branch ] file（如果 reset 允许你这样运行的话）- 这样对工作目录并不安全，它也不会移动 HEAD。
+
+---
+#### __. Git 查看提交历史
+- 查看提交历史的详细信息
+> git log </br>
+- -p 查看每次提交内容的差异, -2 查看最近两次提交
+> git log -p -2 
+- --stat 每次提交的简要统计信息
+> git log --stat
+- --pretty 可以指定使用不同于默认格式的方式提交历史。一些内建的子选项如，oneline / short / full / fuller ，展示的信息各有不同。
+> git log --pretty=oneline
+- --oneline 以一行简短信息查看提交历史
+> git log --oneline
+- --pretty=format:"%h - %an, %ar : %s" 定制显示的格式(格式列表请查看[git-book-历史](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2))
+> git log --pretty=format:"%h - %an, %ar : %s"
+- --graph 以 ASCII 图形方式表示分支的合并历史
+> git log --pretty=format:"%h %s" --graph
+- 限制 Git 输出的选项，如 -<n> / --since / --after / --S ... (详见[Git 提交历史](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2))
+
+---
 #### __. Git 钩子
 
+---
 #### __. Git 交互式暂存
 - 当你修改一组文件后，希望这些改动能放到若干提交而不是混杂在一起成为一个提交时，使用 Git 自带的工具会比较有用。
 - 进入交互式终端模式
