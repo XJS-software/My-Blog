@@ -424,6 +424,16 @@ no changes added to commit (use "git add" and/or "git commit -a")
    3.4 *post-commit*
    > 钩子在整个提交过程完成后运行。
 
+4. [husky](https://github.com/typicode/husky)
+> 运行 Git 钩子脚本
+```
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
+    }
+  }
+```
+
 
 #### __. Git 子模块
 1. 开始使用子模块
