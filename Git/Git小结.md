@@ -202,6 +202,29 @@ What now>
 
 ---
 
+## Git tag 标签
+- 列出所有标签
+  > git tag
+- 查看特定标签
+  > git show v1.1
+- 创建附注标签
+  > git tag -a v1.1 -m 'something to say'
+- 创建轻量标签
+  > git tag v1.2
+- 为过去的提交打标签
+  > git tag -a v1.3 2fda3d6
+
+- 将本地标签推送至远程
+  > git push origin v1.1
+- 将所有标签都推送至远程
+  > git push origin --tags
+
+- 删除标签
+  > git tag -d v1.1
+      
+
+---
+
 ## Git 分支
 
 1. 提交对象
@@ -263,7 +286,7 @@ What now>
 $ git status
 On branch master
 You have unmerged paths.
-  (fix conflicts and run "git commit")
+  (fix conflicts and run "git commit")F
 
 Unmerged paths:
   (use "git add <file>..." to mark resolution)
@@ -495,6 +518,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
     }
   }
 ```
+5. 若是 git commit 提交不通过，可以添加 --no-verify 取消 pre-commit 的检测。
 
 ---
 

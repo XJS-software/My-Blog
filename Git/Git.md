@@ -1,6 +1,6 @@
 # Git 基础
 
-## （参考： [Git-Book](https://git-scm.com/book/zh/v2) | [Git 文档](https://mirrors.edge.kernel.org/pub/software/scm/git/docs/)）
+（参考： [Git-Book](https://git-scm.com/book/zh/v2) | [Git 文档](https://mirrors.edge.kernel.org/pub/software/scm/git/docs/)）
 
 ## Git 快照
 
