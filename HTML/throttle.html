@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>节流</title>
+    <style>
+        #div1,
+        #div2 {
+            width: 500px;
+            height: 200px;
+            line-height: 200px;
+            margin: 50px auto;
+            background-color: grey;
+            text-align: center;
+            font-size: 60px;
+            color: red;
+        }
+
+        h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>利用定时器</h3>
+    <div id="div1"></div>
+    <h3>利用时间戳</h3>
+    <div id="div2"></div>
+
+    <script>
+        function throttleByTimer(fun, wait) {
+            let timer = null;
+            return function (...args) {
+                let context = this;
+                !timer && (timer = setTimeout(function () {
+                    timer = null;
+                    fun.apply(context, args);
+                }, wait));
+            }
+        }
+
+        function throttleByTimestamp(fun, wait) {
+            let before = 0;
+            return function (...args) {
+                let context = this;
+                let now = +Date.now();
+                let dis = now - before;
+                if (dis >= wait) {
+                    fun.apply(context, args);
+                    before = now;
+                }
+            }
+        }
+
+        let d1 = document.getElementById('div1');
+        let d2 = document.getElementById('div2');
+
+        let wait = 1000;
+
+        d1.onmousemove = throttleByTimer(function () {
+            alterNum('div1');
+        }, wait);
+        d2.onmousemove = throttleByTimestamp(function () {
+            alterNum('div2');
+        }, wait);
+
+        let numObj = {
+            div1: 0,
+            div2: 0
+        }
+
+        function alterNum(ele) {
+            if (ele === 'div1') {
+                numObj.div1++;
+                d1.innerHTML = numObj.div1;
+            }
+            if (ele === 'div2') {
+                numObj.div2++;
+                d2.innerHTML = numObj.div2;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试防抖函数</title>
+    <style>
+        #div,
+        #div2 {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        #div2 {
+            background-color: grey;
+        }
+
+        #btn,
+        #btn2,
+        #btn3,
+        #btn4 {
+            display: inline-block;
+            padding: 10px 0;
+            width: 400px;
+            user-select: none;
+            color: #fff;
+            margin: 20px 0;
+        }
+
+        #btn {
+            background-color: red;
+        }
+
+        #btn2 {
+            background-color: green;
+        }
+
+        #btn3 {
+            background-color: blue;
+        }
+
+        #btn4 {
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div">
+        <botton id="btn" onclick="handleClick('btn')">点击测试，延时执行</botton>
+        </br>
+        <botton id="btn2" onclick="handleClick2('btn2')">点击测试，立即执行</botton>
+    </div>
+
+    <div id="div2">
+        <botton id="btn3" onclick="handleClick3('btn3')">点击测试，延时执行</botton>
+        </br>
+        <botton id="btn4" onclick="handleClick4('btn4')">点击测试，立即执行</botton>
+    </div>
+
+    <script>
+        function debounceDelay(fun, wait) {
+            wait = wait || 300;
+            let timer = null;
+            return function (...args) {
+                let context = this;
+                timer && clearTimeout(timer);
+                timer = setTimeout(function () {
+                    timer = null;
+                    fun.apply(context, args);
+                }, wait);
+            }
+        }
+
+        function debounceNow(fun, wait) {
+            wait = wait || 300;
+            let timer = null;
+            return function (...args) {
+                let context = this;
+                !timer && fun.apply(context, args);
+                timer && clearTimeout(timer);
+                timer = setTimeout(function () {
+                    timer = null;
+                }, wait);
+            }
+        }
+
+        function debounce(fun, wait, immediate) {
+            wait = wait || 300;
+            let timer = null;
+            return function (...args) {
+                let context = this;
+                immediate && !timer && fun.apply(context, args);
+                timer && clearTimeout(timer);
+                timer = setTimeout(function () {
+                    timer = null;
+                    !immediate && fun.apply(context, args);
+                }, wait);
+            }
+        }
+
+        let handleClick = debounceDelay(showNum, 500);
+        let handleClick2 = debounceNow(showNum, 500);
+        let handleClick3 = debounce(showNum, 500, false);
+        let handleClick4 = debounce(showNum, 500, true);
+        let numObj = {
+            btn: 0,
+            btn2: 0,
+            btn3: 0,
+            btn4: 0
+        }
+
+        function showNum(ele) {
+            numObj[ele]++;
+            let dom = document.getElementById(ele);
+            dom.innerHTML = 'Num: ' + numObj[ele];
+        }
+
+        /*-------------------------------------------------------------------------*/
+    </script>
+</body>
+
+</html>

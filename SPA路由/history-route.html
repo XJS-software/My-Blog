@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>history-route</title>
+</head>
+
+<body>
+
+    <div id="id"></div>
+    <a class="route" href="/test1">测试1</a>
+    <a class="route" href="/test2">测试2</a>
+    <a class="route" href="/test3">测试3</a>
+
+    </br>
+    </br>
+    <button onclick="pushState()">pushState</button>
+    </br>
+    </br>
+    <button onclick="replaceState()">replaceState</button>
+    </br>
+
+
+    <script>
+        class MyRoute {
+            constructor() {
+                this.routes = {};
+                this.currentRoute = '';
+            }
+            // 初始化
+            init() {
+                window.addEventListener('popstate', (e) => {
+                    console.log('---', window.location.href);
+                    this.currentRoute = window.location.href.split(location.host)[1];
+                    console.log('this.currentRoute: ', this.currentRoute);
+                    this.render(this.currentRoute);
+                })
+
+                const links = document.querySelectorAll('.route')
+                links.forEach((item) => {
+                    // 覆盖 a 标签的 click 事件，防止默认跳转行为
+                    item.onclick = (e) => {
+                        e.preventDefault();
+                        // 获取修改之后的 URL
+                        this.currentRoute = e.target.getAttribute('href');
+                        // 渲染
+                        this.render(this.currentRoute);
+                    }
+                })
+
+            }
+
+            // 渲染
+            render(route) {
+                if (this.routes[route]) {
+                    this.routes[route]();
+                } else {
+                    contentBox.innerHTML = '404 未找到资源';
+                }
+            }
+
+            // 注册路由
+            registerRoute(route, callback = () => {}, type) {
+                this.routes[route] = () => {
+                    if (type === 1) {
+                        history.replaceState({
+                            route
+                        }, route, route);
+                    } else {
+                        history.pushState({
+                            route
+                        }, route, route);
+                    }
+                    callback();
+                };
+            }
+        }
+
+        window.newRoute = new MyRoute();
+        newRoute.init();
+
+        const contentBox = document.getElementById('id');
+
+        newRoute.registerRoute('/test1', () => {
+            contentBox.innerHTML = '/test1';
+        });
+
+        newRoute.registerRoute('/test2', () => {
+            contentBox.innerHTML = '/test2 -> import data';
+        });
+
+        newRoute.registerRoute('/test3', () => {
+            setTimeout(() => {
+                contentBox.innerHTML = '/test3 -> ajax data';
+            }, 300);
+        });
+    </script>
+
+    <script>
+        // 以下代码需要在本地服务器中运行
+        function pushState() {
+            const state = {
+                foo: 'bar'
+            };
+            // 此时 url -> localhost:8080/push-state
+            // 点击返回上一页回到 localhost:8080/history-route.html
+            history.pushState(state, 'page 2', '/push-statue');
+            console.log('--', history.state); // {foo: 'bar'}
+        }
+
+
+        function replaceState() {
+            const state = {
+                foo: 'bar'
+            };
+            // 此时 url -> localhost:8080/replace-state
+            // 点击返回上一页回到 localhost:8080/history-route.html
+            history.replaceState(state, 'page 2', '/replace-state');
+            console.log('--', history.state);
+        }
+    </script>
+
+</body>
+
+</html>

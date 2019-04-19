@@ -1,0 +1,1 @@
+export default '<div>我从 hash-demo 中来！</div>';

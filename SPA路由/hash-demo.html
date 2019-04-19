@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>hash-demo</title>
+  <style>
+    #id {
+      height: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="id"></div>
+  <a href="#/test1">测试1</a>
+  <a href="#/test2">测试2</a>
+  <a href="#/test3">测试3</a>
+  </br>
+  <button onclick="alterHash()">404</button>
+
+  <script>
+    // import hashDemo from './hash-demo.js';
+    let hashDemo = '我应该从 ./hash-demo.js 导入';
+
+    class MyRoute {
+      constructor(){
+        this.routes = {}; // 维护注册路由
+        this.currentHash = ''; // 保持当前路由
+      }
+
+      // 内部注册路由
+      registerRoutes(route,callback=()=>{}){
+        this.routes[route] = callback;
+      }
+
+      // 渲染页面
+      render(){
+        this.currentHash = window.location.hash.slice(1) || '/';
+        if(this.routes[this.currentHash]){
+          this.routes[this.currentHash]();
+        }else{
+          contentBox.innerHTML = '404 未找到资源';
+        }        
+      }
+
+      // 初始化
+      init(){
+        window.addEventListener('hashchange',this.render.bind(this),false);
+      }
+    }
+    // 初始化
+    window.newRoute = new MyRoute();
+    newRoute.init();
+
+    // 获取渲染父节点
+    const contentBox = document.getElementById('id');
+
+    // 注册路由
+    newRoute.registerRoutes('/test1',()=>{
+      contentBox.innerHTML = 'test1';
+    })
+
+    newRoute.registerRoutes('/test2',()=>{
+      contentBox.innerHTML = hashDemo;
+    })
+    
+    newRoute.registerRoutes('/test3',()=>{
+      setTimeout(()=>{
+        contentBox.innerHTML = '异步请求内容...';
+      },400);
+    })
+
+    // 模拟 404
+    function alterHash(){
+      window.location.hash = '404';
+    }
+
+  </script>
+</body>
+
+</html>
