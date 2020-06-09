@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='root'></div>
+
+
+  <script>
+    let activeUpdate = null
+
+    class Dep {
+      constructor(){
+        this.dependencies = new Set()
+      }
+
+      depend(){
+        if(activeUpdate){
+          this.dependencies.add(activeUpdate)
+        }
+      }
+
+      notify(){
+        this.dependencies.forEach(sub => sub())
+      }
+    }
+
+    const dep = new Dep()
+
+    function autorun(update){
+      function wrapped(){
+        activeUpdate = wrapped
+        update()
+        activeUpdate = null
+      }
+      wrapped()
+    }    
+
+    function observe(obj){
+      Object.keys(obj).forEach(key=>{
+        let val = obj[key]
+        Object.defineProperty(obj,key,{
+          get(){
+            // console.log(`I get ${key} value: ${val}`);
+            dep.depend()
+            return val
+          },
+          set(newVal){
+            dep.notify()
+            // console.log(`I set ${key} value to: ${newVal}`)
+            val = newVal
+          }
+        })
+      })
+    }
+
+    const state = {
+      count: 0
+    }
+
+    observe(state)
+
+    autorun(()=>{
+      render()
+    })
+
+    let count = 0
+    setInterval(() => {
+      state.count = count++
+    }, 1000);
+
+    function render(){
+      const dom = document.getElementById('root')
+      dom.innerText = state.count
+    }
+
+
+  </script>
+</body>
+</html>
