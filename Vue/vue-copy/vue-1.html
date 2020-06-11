@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /** 疑问: self ? */
+    /** 疑问: ( a = 4, b = 5 ) ? */
+    (function(global, factory){
+
+      (global = global || self, global.Vue = factory())
+
+    })(this,function(){})
+
+    // window, self, top, parent
+    // 三者都是全局对象 window 的属性
+
+    // self 
+    // 总是指向当前窗口本身
+    // 在 iframe 中，a.html 通过 iframe 嵌入 b.html 
+    // 在 b.html 中，self.parent 指向 a.html
+    // self 的也应用于 webworkers
+    // webworkers 新开了一个线程，在此线程中可通过 self 访问全局对象
+    
+    // 若是 b.html 继续嵌套子窗口，那么在子窗口中
+    // self.top 指向顶层窗口，即 a.html
+
+    // 在顶层窗口 window === self === top === parent 都指向全局对象
+
+
+
+    var b = 1
+    var c = 2
+    var d = 3
+    var a = ( b = 2, c = 1, b = 4 )
+    console.log(a , b); // 4,4
+    // 括号内由左至右运行
+    // 运行到 b = 4 时，等价于 a = b = 4
+  </script>
+  
+</body>
+</html>
