@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /** 创建一个新对象 */
+
+    /** var cleanObj = Object.create(null) */
+    // Object.create(null) 创建的对象没有继承任何对象，因此也没有任何原型属性和方法
+    // 可以用来单单作为字典对象，
+    // for...in 遍历时不需要考虑继承的属性的问题，即 hasOwnProperty
+
+    // obj = {} 等价于 obj = Object.create(Object.prototype) 
+    // 此对象继承了 Object 的原型对象
+ 
+    var cleanObj = Object.create(null) 
+    var obj = {}
+    var obj2 = new Object()
+
+    console.log('cleanObj.constructor: ', cleanObj.constructor); // undefined
+    console.log('obj.constructor: ', obj.constructor); // ƒ Object() { [native code] }
+    console.log('obj2.constructor: ', obj2.constructor); // ƒ Object() { [native code] }
+
+    cleanObj.foo = 'bar'
+    cleanObj.f = 'b'
+    for(let key in cleanObj){
+      console.log('key: value', key,cleanObj[key]);
+    }
+
+  </script>
+  
+</body>
+</html>
