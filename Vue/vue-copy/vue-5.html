@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /** 将 - 转化为驼峰 */
+    /** 对已转化字符串进行缓存 */
+
+    var cached = function(fn){
+      const map = Object.create(null)
+      return (function(str){
+        var hit = map[str]
+        return hit || (map[str] = fn(str))
+      })
+    }
+
+    var reg = /-(\w)/g
+    var camelize = cached(function(str){
+      return str.replace(reg,function(_,m){
+        return m ? m.toUpperCase() : ''
+      })
+    })
+
+    var strAry = ['s-u','sk','s-h-e','s-u']
+    strAry.forEach(item=>{
+      var res = camelize(item)
+      console.log('res: ', res);
+    })
+
+    
+  </script>
+  
+</body>
+</html>
