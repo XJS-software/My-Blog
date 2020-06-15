@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+    /** vue 中实现 this.name 返回 this.data.name */
+    /** 通过一层代理实现 */
+    function myProxy(vm,sourceKey,key){
+      Object.defineProperty(vm,key,{
+        get(){
+          console.log('I get val:', vm[sourceKey][key]);
+          return vm[sourceKey][key]
+        },
+        set(val){
+          vm[sourceKey][key] = val
+        }
+      })
+    }
+
+    const vm = {
+      data: {
+        foo: 'bar',
+        hei: 'ha'
+      }
+    }
+
+    myProxy(vm,'data','foo')
+    // console.log('vm.data.foo: ', vm.data.foo);
+    // console.log('vm.foo: ', vm.foo);
+
+    vm.foo = 'ya'
+    // console.log('vm.data.foo: ', vm.data.foo);
+    // console.log('vm.foo: ', vm.foo);
+
+    function otherProxy(vm,sourceKey){
+      const keys = Object.keys(vm[sourceKey])
+      keys.forEach(key=>{
+        myProxy(vm,sourceKey,key)
+      })
+    }
+
+    const obj = {
+      data: {
+        a: 1,
+        b: 2
+      }
+    }
+
+    otherProxy(obj,'data')
+
+    console.log('obj: ', obj);
+    console.log('a in obj: ', 'a' in obj); // true
+    console.log('obj.hasOwnProperty(a): ', obj.hasOwnProperty('a')); // true
+    
+    obj.a = 10
+
+    // console.log('obj.a: ', obj.a);
+    // console.log('obj.data.a: ', obj.data.a);
+    // console.log('obj.b: ', obj.b);
+    // console.log('obj.data.b: ', obj.data.b);
+
+    /** */
+
+
+    /** 以 '$' or '_' 开头的字段，不会被代理到 this._data 中 */
+    const vue = new Vue({
+      data: {
+        _name: '哈哈',
+        name: '嘿嘿',
+        $name: '呵呵呵'
+
+      }
+    })
+    console.log('vue._name: ', vue._name); // undefined
+    console.log('vue.name: ', vue.name);   // 嘿嘿
+    console.log('vue.$name: ', vue.$name); // undefined
+
+
+    
+  </script>
+  
+</body>
+</html>

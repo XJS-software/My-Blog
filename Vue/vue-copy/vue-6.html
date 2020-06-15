@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>{{a}} | {{b}}</div>
+
+  <script>
+    var data = {a:1,b:2}
+
+    debugger
+
+    var vm = new Vue({
+      el: '#app',
+      data,
+      watch: {
+        a(oldVal,newVal){
+          console.log('oldVal,newVal: ', oldVal,newVal);
+        }
+      }
+    })
+
+    vm.$watch('b',function(oldVal,newVal){
+      console.log('oldVal,newVal: ', oldVal,newVal);
+    })
+
+    console.log('--',vm.$el);
+
+    data.a = 2
+
+    vm.b = 3
+
+    /** 问题 */
+    // new Vue 做了哪些事情？
+    // 怎么对 data 进行响应式改造？
+    // 模板的解析？
+    // virtual-DOM?
+    // 模板的更新？
+    // Vue实例生命周期的理解？
+
+
+
+    
+  </script>
+  
+</body>
+</html>
