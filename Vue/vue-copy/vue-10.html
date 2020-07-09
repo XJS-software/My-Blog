@@ -5,12 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="../vue.js"></script>
   <title>Document</title>
+  <style>
+    .tt{
+      color: red
+    }
+    .tt[data-test]{
+      color: black
+    }
+
+  </style>
 </head>
+
 <body>
   <div id="app">
     <div> {{s}},{{a[0]}},{{o.e}}</div>
     <div>哈哈哈</div>
   </div>
+
+  <div data-test class="tt">嘿嘿嘿</div>
 
   <script>
     const vm = new Vue({
@@ -36,7 +48,7 @@
     // }, 3000);
     
     const a = `with(this){return _c('div',{attrs:{"id":"app"}},[_c('div',[_v(" "+_s(s)+","+_s(a[0])+","+_s(o.e))]),_v(" "),_c('div',[_v("哈哈哈")])])}`
-    
+
   </script>
   
 </body>
