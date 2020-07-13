@@ -20,6 +20,25 @@ var decks = {
         };
     }
 };
-var cp = decks.createCardPicker('I am a arg');
+var cp = decks.createCardPicker(' I am a arg');
 var pc = cp();
 console.log("card: " + pc.card + " of " + pc.suit + pc.someArg);
+var Test = /** @class */ (function () {
+    function Test() {
+    }
+    Test.prototype.sayInfo = function () {
+        console.log('this.info: ', this.info);
+    };
+    Test.prototype.setInfo = function (info) {
+        this.info = info;
+    };
+    return Test;
+}());
+var test11 = new Test();
+var test22 = new Test();
+test11.setInfo('test11');
+test11.sayInfo();
+test22.sayInfo();
+// Test.prototype.setInfo('Test info')
+// Test.prototype.sayInfo()
+console.log('-', Test.prototype);
