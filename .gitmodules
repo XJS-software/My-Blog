@@ -1,4 +1,0 @@
-[submodule "JS"]
-	path = JS
-	url = https://github.com/jinshan-xu/JS.git
-	branch = dev
