@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /** 
+      perimeter-> 箭头函数内部 this 指向函数定义时的作用域对象
+                  perimeter 函数定义时，外部作用域是 window 而不是 shape 对象！！
+
+      这说明只有全局作用域和函数作用域？？对象内部并没有作用域？
+     */
+
+    const shape = {
+      radius: 10,
+      diameter() {
+        return this.radius * 2;
+      },
+      perimeter: () => 2 * Math.PI * this.radius,
+    };
+
+    console.log(shape.diameter());
+    console.log(shape.perimeter()); // NaN
+
+
+  </script>
+</body>
+</html>

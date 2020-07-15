@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+      /** 
+        总结：类的静态属性和方法，仅绑定与自身
+             不会绑定到原型上
+       */
+
+      class Chameleon {
+        static color = 'staticColor'
+        static colorChange(newColor) {
+          this.newColor = newColor;
+          return this.newColor;
+        }
+
+        constructor({ newColor = 'green' } = {}) {
+          this.newColor = newColor;
+        }
+      }
+
+      const freddie = new Chameleon({ newColor: 'purple' });
+      console.log('freddie.color: ', freddie.color);
+      console.log('freddie.colorChange: ', freddie.colorChange);
+
+      console.log('Chameleon.colorChange: ', Chameleon.colorChange);
+      console.log('Chameleon.color: ', Chameleon.color);
+
+  </script>
+</body>
+</html>
