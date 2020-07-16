@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    /** 
+      基本数据类型之间的比较与引用数据类型的比较
+
+      引用数据类型的比较：== 与 === 都是对引用地址的引用
+     */
+
+      function checkAge(data) {
+        if (data === { age: 18 }) {
+          console.log('You are an adult!');
+        } else if (data == { age: 18 }) {
+          console.log('You are still an adult.');
+        } else {
+          console.log(`Hmm.. You don't have an age I guess`);
+        }
+      }
+
+      const p = { age: 18 }
+
+      checkAge(p);
+
+  </script>
+</body>
+</html>

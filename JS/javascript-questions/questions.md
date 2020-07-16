@@ -152,3 +152,193 @@ B: Bubbling > Target > Capturing
 C: Target > Bubbling > Capturing
 D: Capturing > Target > Bubbling
 ```
+
+14.
+```javascript
+All object have prototypes.
+
+A: true
+B: false
+```
+
+15.
+```javascript
+function sum(a, b) {
+  return a + b;
+}
+
+sum(1, '2');
+```
+
+16.
+```javascript
+let number = 0;
+console.log(number++);
+console.log(++number);
+console.log(number);
+```
+
+17.
+```javascript
+function getPersonInfo(one, two, three) {
+  console.log(one);
+  console.log(two);
+  console.log(three);
+}
+
+const person = 'Lydia';
+const age = 21;
+
+getPersonInfo`${person} is ${age} years old`;
+
+A: "Lydia" 21 ["", " is ", " years old"]
+B: ["", " is ", " years old"] "Lydia" 21
+C: "Lydia" ["", " is ", " years old"] 21
+```
+
+18. 
+```javascript
+function checkAge(data) {
+  if (data === { age: 18 }) {
+    console.log('You are an adult!');
+  } else if (data == { age: 18 }) {
+    console.log('You are still an adult.');
+  } else {
+    console.log(`Hmm.. You don't have an age I guess`);
+  }
+}
+
+checkAge({ age: 18 });
+
+A: You are an adult!
+B: You are still an adult.
+C: Hmm.. You don't have an age I guess
+```
+
+19.
+```javascript
+function getAge(...args) {
+  console.log(typeof args);
+}
+
+getAge(21);
+```
+
+
+20.
+```javascript
+function getAge() {
+  'use strict';
+  age = 21;
+  console.log(age);
+}
+
+getAge();
+```
+
+21.
+```javascript
+const sum = eval('10*10+5');
+```
+
+22.
+```javascript
+sessionStorage.setItem('cool_secret', 123);
+
+A: Forever, the data doesn't get lost.
+B: When the user closes the tab.
+C: When the user closes the entire browser, not only the tab.
+D: When the user shuts off their computer.
+```
+
+23.
+```javascript
+var num = 8;
+var num = 10;
+
+console.log(num);
+```
+
+24.
+```javascript
+const obj = { 1: 'a', 2: 'b', 3: 'c' };
+const set = new Set([1, 2, 3, 4, 5]);
+
+obj.hasOwnProperty('1');
+obj.hasOwnProperty(1);
+set.has('1');
+set.has(1);
+
+A: false true false true
+B: false true true true
+C: true true false true
+D: true true true true
+```
+
+25.
+```javascript
+const obj = { a: 'one', b: 'two', a: 'three' };
+console.log(obj);
+
+A: { a: "one", b: "two" }
+B: { b: "two", a: "three" }
+C: { a: "three", b: "two" }
+D: SyntaxError
+```
+
+26. 
+```javascript
+The JavaScript global execution context creates two things for you: the global object, and the "this" keyword.
+
+A: true
+B: false
+C: it depends
+```
+
+27. 
+```javascript
+for (let i = 1; i < 5; i++) {
+  if (i === 3) continue;
+  console.log(i);
+}
+```
+
+28.
+```javascript
+String.prototype.giveLydiaPizza = () => {
+  return 'Just give Lydia pizza already!';
+};
+
+const name = 'Lydia';
+
+name.giveLydiaPizza();
+
+A: "Just give Lydia pizza already!"
+B: TypeError: not a function
+C: SyntaxError
+D: undefined
+```
+
+29.
+```javascript
+const a = {};
+const b = { key: 'b' };
+const c = { key: 'c' };
+
+a[b] = 123;
+a[c] = 456;
+
+console.log(a[b]);
+```
+
+30.
+```javascript
+const foo = () => console.log('First');
+const bar = () => setTimeout(() => console.log('Second'));
+const baz = () => console.log('Third');
+
+bar();
+foo();
+baz();
+
+```

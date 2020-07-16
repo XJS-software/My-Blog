@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /** 
+      结论： 任何函数自身都有 prototype 属性
+            但是普通对象没有
+     */
+
+    function anyFun(){}
+    console.log(anyFun.hasOwnProperty('prototype')); // true
+    console.log('prototype' in anyFun); // true
+
+
+    const anyObj = new Object()
+    console.log('anyObj: ', anyObj);
+    console.log(anyObj.hasOwnProperty('prototype')); // false
+    console.log('prototype' in anyObj); // false
+
+
+    const anyNumber = new Number(1)
+    console.log('anyNumber: ', anyNumber);
+    console.log(anyNumber.hasOwnProperty('prototype')); // false
+    console.log('prototype' in anyNumber); // false
+
+    const anyDate = new Date()
+    console.log('anyDate: ', anyDate);
+    console.log(anyDate.hasOwnProperty('prototype')); // false
+    console.log('prototype' in anyDate); // false
+
+  </script>
+</body>
+</html>

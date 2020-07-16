@@ -27,3 +27,42 @@
 12. Person {firstName: "Lydia", lastName: "Hallie"} and undefined
 
 13. C
+
+14. B
+
+15. 12
+
+16. 0 2 2
+
+17. B
+
+18. C
+
+19. object
+
+20. ReferenceError
+
+21. 105
+
+22. B
+
+23. 10 
+
+24. C
+
+25. C
+
+26. A
+
+27. 1 2 4
+
+28. A
+
+29. 456
+
+30. First Third Second
+
+```javascript
+
+```
+
