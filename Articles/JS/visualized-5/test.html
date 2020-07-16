@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    const cleanObj = Object.create(null)
+    console.log('cleanObj: ', cleanObj);
+
+    const person = {
+      name: 'p',
+      age: 1
+    }
+    const aPerson = Object.create(person)
+    console.log('aPerson: ', aPerson);
+
+    const obj = {}
+    console.log('obj: ', obj);
+
+
+  </script>
+</body>
+</html>
