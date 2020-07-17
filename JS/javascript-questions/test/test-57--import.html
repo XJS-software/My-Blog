@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+      /** 
+        此处需要深入了解
+       */
+
+      /** 
+        从一个文件 export 的值为 readOnly 
+        无法修改，否则会报错
+        
+        不论数据类型
+
+        被导出的数据只能在被定义的文件中修改
+       */
+
+
+      // counter.js
+      let counter = 10;
+      export default counter;
+
+      // index.js
+      import myCounter from './counter';
+
+      myCounter += 1; // error 
+
+      console.log(myCounter);
+
+
+  </script>
+</body>
+</html>

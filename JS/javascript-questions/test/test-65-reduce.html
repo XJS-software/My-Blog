@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    /** 
+      array.reduce
+      args: ( cb, params )
+      cb: (pre,next,index,ary) => {  }
+
+      对 cb 而言，
+      1. 如果有 params 参数
+         params 作为第一个参数传入，array[0] 作为第二个参数
+         index = 1
+
+      2. 如果没有 params 参数
+         array[0], array[1] 作为参数传入
+         index = 0
+
+      cb 的返回值作为下一次循环的 cb 函数的第一个参数传入
+
+      pre
+      初始值 = params ，如果 params 不传则为 array[0]
+
+      next
+      当前元素 = array[0]，如果 params 不传则为 array[1]
+
+      index 
+      当前元素的索引 = 0 ，如果 params 不传则为 1
+      index: [0, length - 1 ]
+     */
+
+    const ary = [1,2,3,4]
+    const res1 = ary.reduce((x,y,idx)=>{
+      console.log('x,y: ', x,y);
+      console.log('idx: ', idx);
+    })
+    console.log('res1: ', res1);
+
+    const res2 = ary.reduce((x,y,idx)=>{
+      console.log('x,y: ', x,y);
+      console.log('idx: ', idx);
+    },0)
+    console.log('res2: ', res2);
+
+  </script>
+</body>
+</html>
