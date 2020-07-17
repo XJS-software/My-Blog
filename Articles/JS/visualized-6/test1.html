@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    /** 
+      可迭代数据类型：Array String Map Set GeneratorObject
+     */
+
+    const i = Symbol.iterator
+    console.log('i: ', i);  // i:  Symbol(Symbol.iterator)
+
+    const str = 'some string'
+    console.log('str[i]: ', str[i]); // str[i]:  ƒ [Symbol.iterator]() { [native code] }
+
+    function* generatorFun(){
+      yield 1
+      yield 2
+      return 3
+    }
+    const genObj = generatorFun()
+    console.log('genObj[i]: ', genObj[i]); // genObj[i]:  ƒ [Symbol.iterator]() { [native code] }
+
+    for(let g of genObj){
+      console.log('g: ', g);
+    }
+
+    const genObj2 = generatorFun()
+    const cc = genObj2.next()
+    const genArray = [...genObj2]
+    console.log('genArray: ', genArray);
+
+  </script>
+</body>
+</html>
