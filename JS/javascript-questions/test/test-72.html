@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    /** 
+      String.raw 将忽略 \n 等转义字符，将其作为字符串使用
+     */
+
+    const res = String.raw`hello\nworld`
+    console.log('res: ', res); // hello\nworld
+
+  </script>
+</body>
+</html>

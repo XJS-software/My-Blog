@@ -953,3 +953,637 @@ B: 257548
 C: A string containing their code points
 D: Error
 ```
+
+71.
+```javascript
+// How can we log the values that are commented out after the console.log statement?
+
+function* startGame() {
+  const answer = yield 'Do you love JavaScript?';
+  if (answer !== 'Yes') {
+    return "Oh wow... Guess we're gone here";
+  }
+  return 'JavaScript loves you back ❤️';
+}
+
+const game = startGame();
+console.log(/* 1 */); // Do you love JavaScript?
+console.log(/* 2 */); // JavaScript loves you back ❤️
+
+A: game.next("Yes").value and game.next().value
+B: game.next.value("Yes") and game.next.value()
+C: game.next().value and game.next("Yes").value
+D: game.next.value() and game.next.value("Yes")
+```
+
+72.
+```javascript
+console.log(String.raw`Hello\nworld`);
+
+A: Hello world!
+B: Hello
+     world
+C: Hello\nworld
+D: Hello\n
+     world
+```
+
+73.
+```javascript
+async function getData() {
+  return await Promise.resolve('I made it!');
+}
+
+const data = getData();
+console.log(data);
+
+A: "I made it!"
+B: Promise {<resolved>: "I made it!"}
+C: Promise {<pending>}
+D: undefined
+```
+
+74.
+```javascript
+function addToList(item, list) {
+  return list.push(item);
+}
+
+const result = addToList('apple', ['banana']);
+console.log(result);
+
+A: ['apple', 'banana']
+B: 2
+C: true
+D: undefined
+```
+
+75.
+```javascript
+const box = { x: 10, y: 20 };
+
+Object.freeze(box);
+
+const shape = box;
+shape.x = 100;
+
+console.log(shape);
+
+A: { x: 100, y: 20 }
+B: { x: 10, y: 20 }
+C: { x: 100 }
+D: ReferenceError
+```
+
+76.
+```javascript
+const { name: myName } = { name: 'Lydia' };
+
+console.log(name);
+
+A: "Lydia"
+B: "myName"
+C: undefined
+D: ReferenceError
+```
+
+77.
+```javascript
+// Is this a pure function?
+function sum(a, b) {
+  return a + b;
+}
+
+A: Yes
+B: No
+```
+
+78.
+```javascript
+const add = () => {
+  const cache = {};
+  return num => {
+    if (num in cache) {
+      return `From cache! ${cache[num]}`;
+    } else {
+      const result = num + 10;
+      cache[num] = result;
+      return `Calculated! ${result}`;
+    }
+  };
+};
+
+const addFunction = add();
+console.log(addFunction(10));
+console.log(addFunction(10));
+console.log(addFunction(5 * 2));
+
+A: Calculated! 20 Calculated! 20 Calculated! 20
+B: Calculated! 20 From cache! 20 Calculated! 20
+C: Calculated! 20 From cache! 20 From cache! 20
+D: Calculated! 20 From cache! 20 Error
+```
+
+79.
+```javascript
+const myLifeSummedUp = ['☕', '💻', '🍷', '🍫'];
+
+for (let item in myLifeSummedUp) {
+  console.log(item);
+}
+
+for (let item of myLifeSummedUp) {
+  console.log(item);
+}
+
+A: 0 1 2 3 and "☕" "💻" "🍷" "🍫"
+B: "☕" "💻" "🍷" "🍫" and "☕" "💻" "🍷" "🍫"
+C: "☕" "💻" "🍷" "🍫" and 0 1 2 3
+D: 0 1 2 3 and {0: "☕", 1: "💻", 2: "🍷", 3: "🍫"}
+```
+
+80.
+```javascript
+const list = [1 + 2, 1 * 2, 1 / 2];
+console.log(list);
+
+A: ["1 + 2", "1 * 2", "1 / 2"]
+B: ["12", 2, 0.5]
+C: [3, 2, 0.5]
+D: [1, 1, 1]
+```
+
+81. 
+```javascript
+function sayHi(name) {
+  return `Hi there, ${name}`;
+}
+
+console.log(sayHi());
+
+A: Hi there,
+B: Hi there, undefined
+C: Hi there, null
+D: ReferenceError
+```
+
+82.
+```javascript
+var status = '😎';
+
+setTimeout(() => {
+  const status = '😍';
+
+  const data = {
+    status: '🥑',
+    getStatus() {
+      return this.status;
+    },
+  };
+
+  console.log(data.getStatus());
+  console.log(data.getStatus.call(this));
+}, 0);
+
+A: "🥑" and "😍"
+B: "🥑" and "😎"
+C: "😍" and "😎"
+D: "😎" and "😎"
+```
+
+83.
+```javascript
+const person = {
+  name: 'Lydia',
+  age: 21,
+};
+
+let city = person.city;
+city = 'Amsterdam';
+
+console.log(person);
+
+A: { name: "Lydia", age: 21 }
+B: { name: "Lydia", age: 21, city: "Amsterdam" }
+C: { name: "Lydia", age: 21, city: undefined }
+D: "Amsterdam"
+```
+
+84.
+```javascript
+function checkAge(age) {
+  if (age < 18) {
+    const message = "Sorry, you're too young.";
+  } else {
+    const message = "Yay! You're old enough!";
+  }
+
+  return message;
+}
+
+console.log(checkAge(21));
+
+A: "Sorry, you're too young."
+B: "Yay! You're old enough!"
+C: ReferenceError
+D: undefined
+```
+
+85.
+```javascript
+fetch('https://www.website.com/api/user/1')
+  .then(res => res.json())
+  .then(res => console.log(res));
+
+A: The result of the fetch method.
+B: The result of the second invocation of the fetch method.
+C: The result of the callback in the previous .then().
+D: It would always be undefined.
+```
+
+86.
+```javascript
+// Which option is a way to set hasName equal to true, provided you cannot pass true as an argument?
+function getName(name) {
+  const hasName = // !!name
+}
+
+A: !!name
+B: name
+C: new Boolean(name)
+D: name.length
+```
+
+
+87.
+```javascript
+console.log('I want pizza'[0]);
+
+A: """
+B: "I"
+C: SyntaxError
+D: undefined
+```
+
+88.
+```javascript
+function sum(num1, num2 = num1) {
+  console.log(num1 + num2);
+}
+
+sum(10);
+
+A: NaN
+B: 20
+C: ReferenceError
+D: undefined
+```
+
+89.
+```javascript
+// module.js
+export default () => 'Hello world';
+export const name = 'Lydia';
+
+// index.js
+import * as data from './module';
+
+console.log(data);
+
+A: { default: function default(), name: "Lydia" }
+B: { default: function default() }
+C: { default: "Hello world", name: "Lydia" }
+D: Global object of module.js
+```
+
+90.
+```javascript
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+const member = new Person('John');
+console.log(typeof member);
+
+A: "class"
+B: "function"
+C: "object"
+D: "string"
+```
+
+91. 
+```javascript
+let newList = [1, 2, 3].push(4);
+
+console.log(newList.push(5));
+
+A: [1, 2, 3, 4, 5]
+B: [1, 2, 3, 5]
+C: [1, 2, 3, 4]
+D: Error
+```
+
+92. 
+```javascript
+function giveLydiaPizza() {
+  return 'Here is pizza!';
+}
+
+const giveLydiaChocolate = () =>
+  "Here's chocolate... now go hit the gym already.";
+
+console.log(giveLydiaPizza.prototype);
+console.log(giveLydiaChocolate.prototype);
+
+A: { constructor: ...} { constructor: ...}
+B: {} { constructor: ...}
+C: { constructor: ...} {}
+D: { constructor: ...} undefined
+```
+
+93. 
+```javascript
+const person = {
+  name: 'Lydia',
+  age: 21,
+};
+
+for (const [x, y] of Object.entries(person)) {
+  console.log(x, y);
+}
+
+A: name Lydia and age 21
+B: ["name", "Lydia"] and ["age", 21]
+C: ["name", "age"] and undefined
+D: Error
+```
+
+94.
+```javascript
+function getItems(fruitList, ...args, favoriteFruit) {
+  return [...fruitList, ...args, favoriteFruit]
+}
+
+getItems(["banana", "apple"], "pear", "orange")
+
+A: ["banana", "apple", "pear", "orange"]
+B: [["banana", "apple"], "pear", "orange"]
+C: ["banana", "apple", ["pear"], "orange"]
+D: SyntaxError
+```
+
+95. 
+```javascript
+function nums(a, b) {
+  if (a > b) console.log('a is bigger');
+  else console.log('b is bigger');
+  return;
+  a + b;
+}
+
+console.log(nums(4, 2));
+console.log(nums(1, 2));
+
+A: a is bigger, 6 and b is bigger, 3
+B: a is bigger, undefined and b is bigger, undefined
+C: undefined and undefined
+D: SyntaxError
+```
+
+96.
+```javascript
+class Person {
+  constructor() {
+    this.name = 'Lydia';
+  }
+}
+
+Person = class AnotherPerson {
+  constructor() {
+    this.name = 'Sarah';
+  }
+};
+
+const member = new Person();
+console.log(member.name);
+
+A: "Lydia"
+B: "Sarah"
+C: Error: cannot redeclare Person
+D: SyntaxError
+```
+
+97. 
+```javascript
+const info = {
+  [Symbol('a')]: 'b',
+};
+
+console.log(info);
+console.log(Object.keys(info));
+
+A: {Symbol('a'): 'b'} and ["{Symbol('a')"]
+B: {} and []
+C: { a: "b" } and ["a"]
+D: {Symbol('a'): 'b'} and []
+```
+
+98. 
+```javascript
+const getList = ([x, ...y]) => [x, y]
+const getUser = user => { name: user.name, age: user.age }
+
+const list = [1, 2, 3, 4]
+const user = { name: "Lydia", age: 21 }
+
+console.log(getList(list))
+console.log(getUser(user))
+
+A: [1, [2, 3, 4]] and undefined
+B: [1, [2, 3, 4]] and { name: "Lydia", age: 21 }
+C: [1, 2, 3, 4] and { name: "Lydia", age: 21 }
+D: Error and { name: "Lydia", age: 21 }
+```
+
+99. 
+```javascript
+const name = 'Lydia';
+
+console.log(name());
+
+A: SyntaxError
+B: ReferenceError
+C: TypeError
+D: undefined
+```
+
+100.
+```javascript
+const output = `${[] && 'Im'}possible!
+You should${'' && `n't`} see a therapist after so much JavaScript lol`;
+
+A: possible! You should see a therapist after so much JavaScript lol
+B: Impossible! You should see a therapist after so much JavaScript lol
+C: possible! You shouldn't see a therapist after so much JavaScript lol
+D: Impossible! You shouldn't see a therapist after so much JavaScript lol
+```
+
+101. 
+```javascript
+const one = false || {} || null;
+const two = null || false || '';
+const three = [] || 0 || true;
+
+console.log(one, two, three);
+
+A: false null []
+B: null "" true
+C: {} "" []
+D: null null true
+```
+
+102. 
+```javascript
+const myPromise = () => Promise.resolve('I have resolved!');
+
+function firstFunction() {
+  myPromise().then(res => console.log(res));
+  console.log('second');
+}
+
+async function secondFunction() {
+  console.log(await myPromise());
+  console.log('second');
+}
+
+firstFunction();
+secondFunction();
+
+A: I have resolved!, second and I have resolved!, second
+B: second, I have resolved! and second, I have resolved!
+C: I have resolved!, second and second, I have resolved!
+D: second, I have resolved! and I have resolved!, second
+```
+
+103. 
+```javascript
+const set = new Set();
+
+set.add(1);
+set.add('Lydia');
+set.add({ name: 'Lydia' });
+
+for (let item of set) {
+  console.log(item + 2);
+}
+
+A: 3, NaN, NaN
+B: 3, 7, NaN
+C: 3, Lydia2, [object Object]2
+D: "12", Lydia2, [object Object]2
+```
+
+104. 
+```javascript
+// What's its value?
+Promise.resolve(5);
+
+A: 5
+B: Promise {<pending>: 5}
+C: Promise {<resolved>: 5}
+D: Error
+```
+
+105.
+```javascript
+function compareMembers(person1, person2 = person) {
+  if (person1 !== person2) {
+    console.log('Not the same!');
+  } else {
+    console.log('They are the same!');
+  }
+}
+
+const person = { name: 'Lydia' };
+
+compareMembers(person);
+
+A: Not the same!
+B: They are the same!
+C: ReferenceError
+D: SyntaxError
+```
+
+106. 
+```javascript
+const colorConfig = {
+  red: true,
+  blue: false,
+  green: true,
+  black: true,
+  yellow: false,
+};
+
+const colors = ['pink', 'red', 'blue'];
+
+console.log(colorConfig.colors[1]);
+
+A: true
+B: false
+C: undefined
+D: TypeError
+```
+
+107. 
+```javascript
+console.log('❤️' === '❤️');
+
+A: true
+B: false
+```
+
+108. 
+```javascript
+//  Which of these methods modifies the original array?
+const emojis = ['✨', '🥑', '😍'];
+
+emojis.map(x => x + '✨');  
+emojis.filter(x => x !== '🥑');
+emojis.find(x => x !== '🥑');
+emojis.reduce((acc, cur) => acc + '✨');
+emojis.slice(1, 2, '✨');
+emojis.splice(1, 2, '✨');
+
+A: All of them
+B: map reduce slice splice
+C: map slice splice
+D: splice
+```
+
+109. 
+```javascript
+const food = ['🍕', '🍫', '🥑', '🍔'];
+const info = { favoriteFood: food[0] };
+
+info.favoriteFood = '🍝';
+
+console.log(food);
+
+A: ['🍕', '🍫', '🥑', '🍔']
+B: ['🍝', '🍫', '🥑', '🍔']
+C: ['🍝', '🍕', '🍫', '🥑', '🍔']
+D: ReferenceError
+```
+
+110. 
+```javascript
+// What does this method do?
+JSON.parse();
+
+A: Parses JSON to a JavaScript value
+B: Parses a JavaScript object to JSON
+C: Parses any JavaScript value to JSON
+D: Parses JSON to a JavaScript object only
+```

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    const sa1 = Symbol('a')
+    const sa2 = Symbol('a')
+    console.log('sa1 === sa2: ', sa1 === sa2); // false
+
+
+    const name = Symbol('name')
+    const obj = {
+      [name]: 1
+    }
+    console.log('obj: ', obj);
+    console.log('obj[Symbol("a")]: ', obj[Symbol('name')]); // undefined
+    console.log('obj[Symbol("a")]: ', obj[name]); // 1
+
+  </script>
+</body>
+</html>
