@@ -1,6 +1,5 @@
-```javascript
+[javascript questions](https://github.com/lydiahallie/javascript-questions)
 
-```
 
 1. undefined   throw error of Reference Error
 
@@ -221,7 +220,95 @@
 109. A
 
 110. A
-```javascript
 
-```
+111. D
+
+112. C
+
+113. A
+
+114. C
+
+115. B
+
+116. C
+
+117. C
+
+118. B
+
+119. B
+
+120. B
+
+121. D
+
+122. C
+
+123. A
+
+124. A
+
+125. D
+
+126. B
+
+127. B (解构赋值)
+
+128. C isNaN & Number.isNaN
+
+129. C
+
+130. C
+
+131. B
+
+132. D
+
+133. D
+
+134. C
+
+135. C
+
+136. A
+
+137. C
+
+138. A
+
+139. D
+
+140. B
+
+141. C
+
+142. B
+
+143. D
+
+144. C ***
+
+146. C
+
+147. D
+
+148. A
+
+149. B
+
+150. C
+
+151. B
+
+152. A
+
+153. B
+
+154. C
+
+155. C
+
+156. B
+
 

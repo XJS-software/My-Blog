@@ -1587,3 +1587,848 @@ B: Parses a JavaScript object to JSON
 C: Parses any JavaScript value to JSON
 D: Parses JSON to a JavaScript object only
 ```
+
+111. 
+```javascript
+let name = 'Lydia';
+
+function getName() {
+  console.log(name);
+  let name = 'Sarah';
+}
+
+getName();
+
+A: Lydia
+B: Sarah
+C: undefined
+D: ReferenceError
+```
+
+112. 
+```javascript
+function* generatorOne() {
+  yield ['a', 'b', 'c'];
+}
+
+function* generatorTwo() {
+  yield* ['a', 'b', 'c'];
+}
+
+const one = generatorOne();
+const two = generatorTwo();
+
+console.log(one.next().value);
+console.log(two.next().value);
+
+A: a and a
+B: a and undefined
+C: ['a', 'b', 'c'] and a
+D: a and ['a', 'b', 'c']
+```
+
+113. 
+```javascript
+console.log(`${(x => x)('I love')} to program`);
+
+A: I love to program
+B: undefined to program
+C: ${(x => x)('I love') to program
+D: TypeError
+```
+
+114. 
+```javascript
+let config = {
+  alert: setInterval(() => {
+    console.log('Alert!');
+  }, 1000),
+};
+
+config = null;
+
+A: The setInterval callback won't be invoked
+B: The setInterval callback gets invoked once
+C: The setInterval callback will still be called every second
+D: We never invoked config.alert(), config is null
+```
+
+115. 
+```javascript
+// Which method(s) will return the value 'Hello world!'?
+const myMap = new Map();
+const myFunc = () => 'greeting';
+
+myMap.set(myFunc, 'Hello world!');
+
+//1
+myMap.get('greeting');
+//2
+myMap.get(myFunc);
+//3
+myMap.get(() => 'greeting');
+
+A: 1
+B: 2
+C: 2 and 3
+D: All of them
+```
+
+116. 
+```javascript
+const person = {
+  name: 'Lydia',
+  age: 21,
+};
+
+const changeAge = (x = { ...person }) => (x.age += 1);
+const changeAgeAndName = (x = { ...person }) => {
+  x.age += 1;
+  x.name = 'Sarah';
+};
+
+changeAge(person);
+changeAgeAndName();
+
+console.log(person);
+
+A: {name: "Sarah", age: 22}
+B: {name: "Sarah", age: 23}
+C: {name: "Lydia", age: 22}
+D: {name: "Lydia", age: 23}
+```
+
+117. 
+```javascript
+// Which of the following options will return 6?
+function sumValues(x, y, z) {
+  return x + y + z;
+}
+
+A: sumValues([...1, 2, 3])
+B: sumValues([...[1, 2, 3]])
+C: sumValues(...[1, 2, 3])
+D: sumValues([1, 2, 3])
+```
+
+118. 
+```javascript
+let num = 1;
+const list = ['🥳', '🤠', '🥰', '🤪'];
+
+console.log(list[(num += 1)]);
+
+A: 🤠
+B: 🥰
+C: SyntaxError
+D: ReferenceError
+```
+
+119. 
+```javascript
+const person = {
+  firstName: 'Lydia',
+  lastName: 'Hallie',
+  pet: {
+    name: 'Mara',
+    breed: 'Dutch Tulip Hound',
+  },
+  getFullName() {
+    return `${this.firstName} ${this.lastName}`;
+  },
+};
+
+console.log(person.pet?.name);
+console.log(person.pet?.family?.name);
+console.log(person.getFullName?.());
+console.log(member.getLastName?.());
+
+A: undefined undefined undefined undefined
+B: Mara undefined Lydia Hallie undefined
+C: Mara null Lydia Hallie null
+D: null ReferenceError null ReferenceError
+```
+
+120. 
+```javascript
+const groceries = ['banana', 'apple', 'peanuts'];
+
+if (groceries.indexOf('banana')) {
+  console.log('We have to buy bananas!');
+} else {
+  console.log(`We don't have to buy bananas!`);
+}
+
+A: We have to buy bananas!
+B: We don't have to buy bananas
+C: undefined
+D: 1
+```
+
+121. 
+```javascript
+const config = {
+  languages: [],
+  set language(lang) {
+    return this.languages.push(lang);
+  },
+};
+
+console.log(config.language);
+
+A: function language(lang) { this.languages.push(lang }
+B: 0
+C: []
+D: undefined
+```
+
+122. 
+```javascript
+const name = 'Lydia Hallie';
+
+console.log(!typeof name === 'object');
+console.log(!typeof name === 'string');
+
+A: false true
+B: true false
+C: false false
+D: true true
+```
+
+123. 
+```javascript
+const add = x => y => z => {
+  console.log(x, y, z);
+  return x + y + z;
+};
+
+add(4)(5)(6);
+
+A: 4 5 6
+B: 6 5 4
+C: 4 function function
+D: undefined undefined 6
+```
+
+124. 
+```javascript
+async function* range(start, end) {
+  for (let i = start; i <= end; i++) {
+    yield Promise.resolve(i);
+  }
+}
+
+(async () => {
+  const gen = range(1, 3);
+  for await (const item of gen) {
+    console.log(item);
+  }
+})();
+
+A: Promise {1} Promise {2} Promise {3}
+B: Promise {<pending>} Promise {<pending>} Promise {<pending>}
+C: 1 2 3
+D: undefined undefined undefined
+```
+
+125. 
+```javascript
+const myFunc = ({ x, y, z }) => {
+  console.log(x, y, z);
+};
+
+myFunc(1, 2, 3);
+
+A: 1 2 3
+B: {1: 1} {2: 2} {3: 3}
+C: { 1: undefined } undefined undefined
+D: undefined undefined undefined
+```
+
+126.
+```javascript
+function getFine(speed, amount) {
+  const formattedSpeed = new Intl.NumberFormat({
+    'en-US',
+    { style: 'unit', unit: 'mile-per-hour' }
+  }).format(speed)
+
+  const formattedAmount = new Intl.NumberFormat({
+    'en-US',
+    { style: 'currency', currency: 'USD' }
+  }).format(amount)
+
+  return `The driver drove ${formattedSpeed} and has to pay ${formattedAmount}`
+}
+
+console.log(getFine(130, 300))
+
+A: The driver drove 130 and has to pay 300
+B: The driver drove 130 mph and has to pay $300.00
+C: The driver drove undefined and has to pay undefined
+D: The driver drove 130.00 and has to pay 300.00
+```
+
+127. 
+```javascript
+const spookyItems = ['👻', '🎃', '🕸'];
+({ item: spookyItems[3] } = { item: '💀' });
+
+console.log(spookyItems);
+
+A: ["👻", "🎃", "🕸"]
+B: ["👻", "🎃", "🕸", "💀"]
+C: ["👻", "🎃", "🕸", { item: "💀" }]
+D: ["👻", "🎃", "🕸", "[object Object]"]
+```
+
+128. 
+```javascript
+const name = 'Lydia Hallie';
+const age = 21;
+
+console.log(Number.isNaN(name));
+console.log(Number.isNaN(age));
+
+console.log(isNaN(name));
+console.log(isNaN(age));
+
+A: true false true false
+B: true false false false
+C: false false true false
+D: false true false true
+```
+
+129. 
+```javascript
+const randomValue = 21;
+
+function getInfo() {
+  console.log(typeof randomValue);
+  const randomValue = 'Lydia Hallie';
+}
+
+getInfo();
+
+A: "number"
+B: "string"
+C: undefined
+D: ReferenceError
+```
+
+130. 
+```javascript
+const myPromise = Promise.resolve('Woah some cool data');
+
+(async () => {
+  try {
+    console.log(await myPromise);
+  } catch {
+    throw new Error(`Oops didn't work`);
+  } finally {
+    console.log('Oh finally!');
+  }
+})();
+
+A: Woah some cool data
+B: Oh finally!
+C: Woah some cool data Oh finally!
+D: Oops didn't work Oh finally!
+```
+
+131. 
+```javascript
+const emojis = ['🥑', ['✨', '✨', ['🍕', '🍕']]];
+
+console.log(emojis.flat(1));
+
+A: ['🥑', ['✨', '✨', ['🍕', '🍕']]]
+B: ['🥑', '✨', '✨', ['🍕', '🍕']]
+C: ['🥑', ['✨', '✨', '🍕', '🍕']]
+D: ['🥑', '✨', '✨', '🍕', '🍕']
+```
+
+132. 
+```javascript
+class Counter {
+  constructor() {
+    this.count = 0;
+  }
+
+  increment() {
+    this.count++;
+  }
+}
+
+const counterOne = new Counter();
+counterOne.increment();
+counterOne.increment();
+
+const counterTwo = counterOne;
+counterTwo.increment();
+
+console.log(counterOne.count);
+
+A: 0
+B: 1
+C: 2
+D: 3
+```
+
+133. 
+```javascript
+const myPromise = Promise.resolve(Promise.resolve('Promise!'));
+
+function funcOne() {
+  myPromise.then(res => res).then(res => console.log(res));
+  setTimeout(() => console.log('Timeout!', 0));
+  console.log('Last line!');
+}
+
+async function funcTwo() {
+  const res = await myPromise;
+  console.log(await res);
+  setTimeout(() => console.log('Timeout!', 0));
+  console.log('Last line!');
+}
+
+funcOne();
+funcTwo();
+
+A: Promise! Last line! Promise! Last line! Last line! Promise!
+B: Last line! Timeout! Promise! Last line! Timeout! Promise!
+C: Promise! Last line! Last line! Promise! Timeout! Timeout!
+D: Last line! Promise! Promise! Last line! Timeout! Timeout!
+```
+
+134. 
+```javascript
+// sum.js
+export default function sum(x) {
+  return x + x;
+}
+
+// index.js
+import * as sum from './sum';
+
+A: sum(4)
+B: sum.sum(4)
+C: sum.default(4)
+D: Default aren't imported with *, only named exports
+```
+
+135. 
+```javascript
+const handler = {
+  set: () => console.log('Added a new property!'),
+  get: () => console.log('Accessed a property!'),
+};
+
+const person = new Proxy({}, handler);
+
+person.name = 'Lydia';
+person.name;
+
+A: Added a new property!
+B: Accessed a property!
+C: Added a new property! Accessed a property!
+D: Nothing gets logged
+```
+
+136. 
+```javascript
+// Which of the following will modify the person object?
+const person = { name: 'Lydia Hallie' };
+
+Object.seal(person);
+
+A: person.name = "Evan Bacon"
+B: person.age = 21
+C: delete person.name
+D: Object.assign(person, { age: 21 })
+```
+
+137. 
+```javascript
+// Which of the following will modify the person object?
+
+const person = {
+  name: 'Lydia Hallie',
+  address: {
+    street: '100 Main St',
+  },
+};
+
+Object.freeze(person);
+
+A: person.name = "Evan Bacon"
+B: delete person.address
+C: person.address.street = "101 Main St"
+D: person.pet = { name: "Mara" }
+```
+
+138. 
+```javascript
+const add = x => x + x;
+
+function myFunc(num = 2, value = add(num)) {
+  console.log(num, value);
+}
+
+myFunc();
+myFunc(3);
+
+A: 2 4 and 3 6
+B: 2 NaN and 3 NaN
+C: 2 Error and 3 6
+D: 2 4 and 3 Error
+```
+
+139. 
+```javascript
+class Counter {
+  #number = 10
+
+  increment() {
+    this.#number++
+  }
+
+  getNum() {
+    return this.#number
+  }
+}
+
+const counter = new Counter()
+counter.increment()
+
+console.log(counter.#number)
+
+A: 10
+B: 11
+C: undefined
+D: SyntaxError
+```
+
+140. 
+```javascript
+const teams = [
+  { name: 'Team 1', members: ['Paul', 'Lisa'] },
+  { name: 'Team 2', members: ['Laura', 'Tim'] },
+];
+
+function* getMembers(members) {
+  for (let i = 0; i < members.length; i++) {
+    yield members[i];
+  }
+}
+
+function* getTeams(teams) {
+  for (let i = 0; i < teams.length; i++) {
+    // ✨ SOMETHING IS MISSING HERE ✨
+  }
+}
+
+const obj = getTeams(teams);
+obj.next(); // { value: "Paul", done: false }
+obj.next(); // { value: "Lisa", done: false }
+
+A: yield getMembers(teams[i].members)
+B: yield* getMembers(teams[i].members)
+C: return getMembers(teams[i].members)
+D: return yield getMembers(teams[i].members)
+```
+
+141. 
+```javascript
+const person = {
+  name: 'Lydia Hallie',
+  hobbies: ['coding'],
+};
+
+function addHobby(hobby, hobbies = person.hobbies) {
+  hobbies.push(hobby);
+  return hobbies;
+}
+
+addHobby('running', []);
+addHobby('dancing');
+addHobby('baking', person.hobbies);
+
+console.log(person.hobbies);
+
+A: ["coding"]
+B: ["coding", "dancing"]
+C: ["coding", "dancing", "baking"]
+D: ["coding", "running", "dancing", "baking"]
+```
+
+142. 
+```javascript
+class Bird {
+  constructor() {
+    console.log("I'm a bird. 🦢");
+  }
+}
+
+class Flamingo extends Bird {
+  constructor() {
+    console.log("I'm pink. 🌸");
+    super();
+  }
+}
+
+const pet = new Flamingo();
+
+A: I'm pink. 🌸
+B: I'm pink. 🌸 I'm a bird. 🦢
+C: I'm a bird. 🦢 I'm pink. 🌸
+D: Nothing, we didn't call any method
+```
+
+143. 
+```javascript
+// Which of the options result(s) in an error?
+const emojis = ['🎄', '🎅🏼', '🎁', '⭐'];
+
+/* 1 */ emojis.push('🦌');
+/* 2 */ emojis.splice(0, 2);
+/* 3 */ emojis = [...emojis, '🥂'];
+/* 4 */ emojis.length = 0;
+
+A: 1
+B: 1 and 2
+C: 3 and 4
+D: 3
+```
+
+144. 
+```javascript
+// What do we need to add to the person object to get ["Lydia Hallie", 21] as the output of [...person]?
+
+const person = {
+  name: "Lydia Hallie",
+  age: 21
+}
+
+[...person] // ["Lydia Hallie", 21]
+
+A: Nothing, object are iterable by default
+B: *[Symbol.iterator]() { for (let x in this) yield* this[x] }
+C: *[Symbol.iterator]() { yield* Object.values(this) }
+D: *[Symbol.iterator]() { for (let x in this) yield this }
+``` 
+
+146. 
+```javascript
+let count = 0;
+const nums = [0, 1, 2, 3];
+
+nums.forEach(num => {
+	if (num) count += 1
+})
+
+console.log(count)
+
+A: 1
+B: 2
+C: 3
+D: 4
+```
+
+147. 
+```javascript
+function getFruit(fruits) {
+	console.log(fruits?.[1]?.[1])
+}
+
+getFruit([['🍊', '🍌'], ['🍍']])
+getFruit()
+getFruit([['🍍'], ['🍊', '🍌']])
+
+A: null, undefined, 🍌
+B: [], null, 🍌
+C: [], [], 🍌
+D: undefined, undefined, 🍌
+```
+
+148. 
+```javascript
+class Calc {
+	constructor() {
+		this.count = 0 
+	}
+
+	increase() {
+		this.count ++
+	}
+}
+
+const calc = new Calc()
+new Calc().increase()
+
+console.log(calc.count)
+
+A: 0
+B: 1
+C: undefined
+D: ReferenceError
+```
+
+149. 
+```javascript
+const user = {
+	email: "e@mail.com",
+	password: "12345"
+}
+
+const updateUser = ({ email, password }) => {
+	if (email) {
+		Object.assign(user, { email })
+	}
+
+	if (password) {
+		user.password = password
+	}
+
+	return user
+}
+
+const updatedUser = updateUser({ email: "new@email.com" })
+
+console.log(updatedUser === user)
+
+A: false
+B: true
+C: TypeError
+D: ReferenceError
+```
+
+150. 
+```javascript
+const fruit = ['🍌', '🍊', '🍎']
+
+fruit.slice(0, 1)
+fruit.splice(0, 1)
+fruit.unshift('🍇')
+
+A: ['🍌', '🍊', '🍎']
+B: ['🍊', '🍎']
+C: ['🍇', '🍊', '🍎']
+D: ['🍇', '🍌', '🍊', '🍎']
+```
+
+151. 
+```javascript
+const animals = {};
+let dog = { emoji: '🐶' }
+let cat = { emoji: '🐈' }
+
+animals[dog] = { ...dog, name: "Mara" }
+animals[cat] = { ...cat, name: "Sara" }
+
+console.log(animals[dog])
+
+A: { emoji: "🐶", name: "Mara" }
+B: { emoji: "🐈", name: "Sara" }
+C: undefined
+D: ReferenceError
+```
+
+152. 
+```javascript
+const user = {
+	email: "my@email.com",
+	updateEmail: email => {
+		this.email = email
+	}
+}
+
+user.updateEmail("new@email.com")
+console.log(user.email)
+
+A: my@email.com
+B: new@email.com
+C: undefined
+D: ReferenceError
+```
+
+153. 
+```javascript
+const promise1 = Promise.resolve('First')
+const promise2 = Promise.resolve('Second')
+const promise3 = Promise.reject('Third')
+const promise4 = Promise.resolve('Fourth')
+
+const runPromises = async () => {
+	const res1 = await Promise.all([promise1, promise2])
+	const res2  = await Promise.all([promise3, promise4])
+	return [res1, res2]
+}
+
+runPromises()
+	.then(res => console.log(res))
+	.catch(err => console.log(err))
+
+A: [['First', 'Second'], ['Fourth']]
+B: [['First', 'Second'], ['Third', 'Fourth']]
+C: [['First', 'Second']]
+D: 'Third'
+```
+
+154. 
+```javascript
+// What should the value of method be to log { name: "Lydia", age: 22 }?
+
+const keys = ["name", "age"]
+const values = ["Lydia", 22]
+
+const method = /* ?? */
+Object[method](keys.map((_, i) => {
+	return [keys[i], values[i]]
+})) // { name: "Lydia", age: 22 }
+
+Object[method]([[name,'Lydia'],[age,21]])
+
+A: entries
+B: values
+C: fromEntries
+D: forEach
+```
+
+155. 
+```javascript
+const createMember = ({ email, address = {}}) => {
+	const validEmail = /.+\@.+\..+/.test(email)
+	if (!validEmail) throw new Error("Valid email pls")
+
+	return {
+		email,
+		address: address ? address : null
+	}
+}
+
+const member = createMember({ email: "my@email.com" })
+console.log(member)
+
+A: { email: "my@email.com", address: null }
+B: { email: "my@email.com" }
+C: { email: "my@email.com", address: {} }
+D: { email: "my@email.com", address: undefined }
+```
+
+156. 
+```javascript
+let randomValue = { name: "Lydia" }
+randomValue = 23
+
+if (!typeof randomValue === "string") {
+	console.log("It's not a string!")
+} else {
+	console.log("Yay it's a string!")
+}
+
+A: It's not a string!
+B: Yay it's a string!
+C: TypeError
+D: undefined
+```

@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    /** 
+      let / const 
+      有变量提升，声明的变量会提升到当前作用域的顶部
+
+      但并不会被初始化，进入暂时性死区。访问此变量会报错：ReferenceError
+
+      直到执行到赋值语句之后才会被初始化
+    
+     */
+
+    let name = 'Lydia';
+
+    function getName() {
+      console.log(name); // 当前作用域有 name 变量，因此不会访问外部作用域的 name 变量
+      let name = 'Sarah';
+    }
+
+    getName(); // ReferenceError
+  </script>
+</body>
+</html>
