@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    console.log('Start');
+
+    const p = new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        console.log('promise');
+        resolve('promise')
+      }, 1000);
+    })
+
+    p.then(()=>{
+      console.log('then');
+    })
+
+
+    setTimeout(() => {
+      console.log('setTimeout');
+    }, 0);
+
+    Promise.resolve().then(()=>{
+      console.log('I am another then');
+    })
+
+    console.log('End');
+  </script>
+</body>
+</html>
