@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../vue.js"></script>
+  <title>Document</title>
+  <style>
+    .v-enter-active,
+    .v-leave-active {
+      transition: all 1s;
+    }
+    .v-enter,
+    .v-leave-to {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .v-leave-active {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    为 v-if / v-else 添加 key
+    否则可能会复用原组件而不是新建组件
+    因此可能会导致一些意想不到的后果
+   -->
+
+  <div id="app">
+    <transition>
+      <div v-if="!error" key='1'>
+        <span>{{message}}</span>
+      </div>
+      <div v-else key='2'>
+        <span>{{errMsg}}</span>
+      </div>
+    </transition>
+
+    <transition>
+      <button v-if="isEditing" key='1' v-on:click="isEditing = false">
+        Save
+      </button>
+      <button v-else  v-on:click="isEditing = true" key='2'>
+        Edit
+      </button>
+    </transition>
+
+  </div>
+
+  <script>
+    
+    const v = new Vue({
+      el: '#app',
+      data: {
+        error: false,
+        message: 'OK',
+        errMsg: 'something wrong',
+        isEditing: false
+      }
+    })
+    setTimeout(() => {
+      v.error = true
+    }, 1000);
+
+  </script>
+  
+</body>
+</html>

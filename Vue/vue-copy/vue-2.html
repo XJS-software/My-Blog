@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <script> 
+    'use strict'
+
+    /** js 的数据描述符 */
+    // configurable、enumerable、writable
+    // configurable: 描述属性是否可配置，可删除
+    // enumerable:   属性是否可被枚举
+    // writable:     属性值是否可被重写
+
+    var emptyObject = Object.freeze({})
+    
+    /** Object.freeze() */
+    // 冻结一个对象
+    // 不能进行修改，新增，删除等操作
+    // 无法修改此对象原型
+    // 相当于: 
+    // configurable: false
+    // enumerable: true
+    // writable: false
+
+    var aFreezedObject = Object.freeze({ key: 'v' })
+    // aFreezedObject.key = 'h' // error in strict mode
+    // aFreezedObject.aKey = 'i' // error in strict mode
+    // delete aFreezedObject.key // error in strict mode
+    console.log('aFreezedObject: ', aFreezedObject); // { key: 'v' }
+
+
+    /** Object.seal() */
+    // 封闭一个对象
+    // 不能新增，删除属性
+    // 并且：
+    // configurable: false
+    // enumerable: true
+    // writable: true
+
+    var aSealedObject = Object.seal({ foo: 'bar' })
+    // delete aSealedObject.foo  // error in strict mode
+    // aSealedObject.baz = 'biz' // error in strict mode
+
+
+    /** Object.preventExtensions() */
+    // 阻止一个对象增加新属性
+    // 此过程不可逆
+
+    /** Object.isExtensible() */
+    // 查看一个对象是否可增加新属性
+
+
+    
+  </script>
+  
+</body>
+</html>

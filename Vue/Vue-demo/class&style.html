@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../vue.js"></script>
+  <title>Document</title>
+  <style>
+    .normal {
+      color : #333;
+    }
+    .active {
+      color: blue;
+    }
+    .error{
+      color: red
+    }
+
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- 根据条件切换类名，无需写三元运算符 -->
+
+  <div id="app">
+    <p class="normal" :class="{active: isActive, error: isError}">
+      hello word!
+    </p>
+  </div>
+
+  <script>
+    const vue = new Vue({
+      el: '#app',
+      data:{
+        isActive: false,
+        isError: false
+      }
+    })
+
+    setTimeout(() => {
+      vue.isActive = true
+    }, 1000);
+
+    setTimeout(() => {
+      vue.isError = true
+    }, 2000);
+    
+  </script>
+  
+</body>
+</html>

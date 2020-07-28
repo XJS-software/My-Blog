@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../vue.js"></script>
+  <title>Document</title>
+  <style>
+    .tt{
+      color: red
+    }
+    .tt[data-test]{
+      color: black
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div> {{s}},{{a[0]}},{{o.e}}</div>
+    <div>哈哈哈</div>
+  </div>
+
+  <div data-test class="tt">嘿嘿嘿</div>
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        s: 1,
+        a: [1,2],
+        o: {
+          e: 11,
+          t: 22
+        }
+      }
+    })
+    setTimeout(() => {
+      vm.a[0] = 4
+      vm.o.e = 10000
+      console.log('vm.data: ', vm._data);
+    }, 1000);
+
+    // setTimeout(() => {
+    //   vm.a = [999,1221]
+    //   vm.o = {e: 9090090}
+    // }, 3000);
+    
+    const a = `with(this){return _c('div',{attrs:{"id":"app"}},[_c('div',[_v(" "+_s(s)+","+_s(a[0])+","+_s(o.e))]),_v(" "),_c('div',[_v("哈哈哈")])])}`
+
+  </script>
+  
+</body>
+</html>
