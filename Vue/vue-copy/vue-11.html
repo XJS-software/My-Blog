@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    {{msg}},{{p1.name}}
+    <test-area></test-area>
+  </div>
+
+  <script>
+
+    Vue.component('test-area',{
+      data(){
+        return {
+          p2: {
+            name: 'Andy'
+          }
+        }
+      },
+      template: `<div id="comp">{{p2.name}}</div>`,
+      mounted(){
+        console.log('p2',this.p2);
+      }
+    })
+    
+    const vue = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello',
+        p1: {
+          name: 'lili'
+        }
+      },
+      mounted(){
+        console.log('p1',this.p1);
+      }
+    })
+
+    
+  </script>
+  
+</body>
+</html>
