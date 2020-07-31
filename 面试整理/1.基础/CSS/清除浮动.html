@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .float-left{
+      float: left;
+    }
+    .f{
+      background-color: whitesmoke;
+      margin-top: 20px;
+      padding: 20px;
+    }
+    .s{
+      background-color: red;
+      height: 100px;
+      width: 100px;
+    }
+    .f-2{
+      overflow: hidden;
+    }
+    .f-3::after{
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="f f-1">
+    <div class="s float-left"></div>
+  </div>
+  <div class="f f-2">
+    <div class="s float-left"></div>
+  </div>
+  <div class="f f-3">
+    <div class="s float-left"></div>
+  </div>
+  <div class="f f-4">
+    <div class="s float-left"></div>
+  </div>
+  <div class="f f-5">
+    <div class="s float-left"></div>
+  </div>
+</body>
+</html>

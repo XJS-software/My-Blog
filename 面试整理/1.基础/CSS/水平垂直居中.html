@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .c{
+      width: 400px;
+      height: 400px;
+      background-color: aliceblue;
+    }
+    .s {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+    }
+    .p-1{
+      position: relative;
+    }
+    .s-1{
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+    }
+
+    .p-2{
+      position: relative;
+    }
+    .s-2{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+
+    .p-3{
+      display: flex ;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .p-4{
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+    }
+    .s-4{
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+  </style>
+</head>
+<body>
+  <div class='c p-1'>
+    <div class='s s-1'></div>
+  </div>
+  </br>
+
+  <div class='c p-2'>
+    <div class='s s-2'></div>
+  </div>
+  
+  </br>
+
+  <div class='c p-3'>
+    <div class='s s-3'></div>
+  </div>
+
+  </br>
+
+  <div class='c p-4'>
+    <div class='s s-4'></div>
+  </div>
+
+  </br>
+  
+</body>
+</html>
