@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .p,.p2,.p3{
+      display: flex;
+      margin-top: 50px;
+    }
+    .s,.s2,.s3{
+      border: 1px solid red ;
+      margin: 5px;
+    }
+
+    .s{
+      flex: 1 1 auto;
+    }
+    .s2{
+      flex: 1;
+    }
+
+
+    .p3{
+      align-items: baseline;
+    }
+    .font-16{
+      font-size: 16px;
+    }
+    .font-24{
+      font-size: 24px;
+    }
+    .font-48{
+      font-size: 48px;
+    }
+
+  </style>
+
+  
+</head>
+<body>
+  <!-- 
+    flex: flex-grow, flex-shrink, flex-basis;
+
+    flex-basis: <some number px>; 决定了项目分配多余空间时，项目占据的主轴空间。根据这个属性计算是否有多余空间
+    
+    flex: 1; 等效于 flex: 1,1,<some number px>
+             设置项目 flex-basis 为相同值，可以让项目进行同比例放大和缩小，达到平分的效果。
+             但如果 flex-basis: auto ，那么就会按照文字长度进行按比例缩放
+   -->
+
+  <div class="p">
+    <div class="s">科技安华福克斯接电话的交罚款是</div>
+    <div class="s">大是否大事发打发打发阿斯顿发送到发送阿斯顿发斯蒂芬生大发送到发送的大师法第三方</div>
+    <div class="s">阿撒打发斯蒂发送到撒发大水发撒的阿斯顿发送到发送到阿斯顿发送到发送大沙发是的发送的阿斯顿发送到发送到发送到发送到发生阿斯顿发送到发送</div>
+  </div>
+
+  <div class="p2">
+    <div class="s2">科技安华福克斯接电话的交罚款是</div>
+    <div class="s2">大是否大事发打发打发阿斯顿发送到发送阿斯顿发斯蒂芬生大发送到发送的大师法第三方</div>
+    <div class="s2">阿撒打发斯蒂发送到撒发大水发撒的阿斯顿发送到发送到阿斯顿发送到发送大沙发是的发送的阿斯顿发送到发送到发送到发送到发生阿斯顿发送到发送</div>
+  </div>
+
+  <div class="p3">
+    <div class="s3 font-16">阿撒打发斯蒂发送到撒发大水发撒的阿斯顿发送到发送到阿斯顿发送到发送大沙发是的发送的阿斯顿发送到发送到发送到发送到发生阿斯顿发送到发送</div>
+    <div class="s3 font-48">大是否大事发打发打发阿斯顿发送到发送阿斯顿发斯蒂芬生大发送到发送的大师法第三方</div>
+    <div class="s3 font-24">科技安华福克斯接电话的交罚款是</div>
+  </div>
+
+  <div id='hello'>hello word</div>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=.5, minimum-scale=0.5, maxmum-scale=0.5" >
+  <title>Document</title>
+  <style>
+    .viewprot{
+      background-color: red;
+      height: 0.5px;
+      margin-top: 40px;
+    }
+
+    .line{
+      margin-top: 40px;
+      height: 1px;
+    }
+    .line-1{
+      background-color: red;
+      transform: scaleY(.5);
+    }
+    .line-2{
+      background: linear-gradient(0deg,transparent ,red );
+    }
+
+    .border-all{
+      padding: 30px;
+      margin: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .border-all::after{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      border: 1px solid red;
+      border-radius: 10px;
+      transform: scale(.5);
+      transform-origin: 0 0;
+      z-index: -1; /* 防止遮挡父元素 */
+    } 
+
+  </style>
+</head>
+<body>
+  <!-- 
+    1. 使用 meta=viewport
+    设置
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=0.5, maxmum-scale=0.5"></meta>
+    可以缩放到原来的 0.5 倍，但是只能在移动端生效
+   -->
+   
+   <!-- 
+     2. 使用 transform: scale(0.5)
+    -->
+    <div class='viewprot'></div>
+
+    <div class="line line-1"></div>
+    <div class="line line-2"></div>
+
+    <div class="border-all" onclick="console.log('1111')">I am border all</div>
+</body>
+</html>
