@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div onclick="say()">哈哈哈哈哈哈</div>
+    <div onclick="say2()">嘿嘿嘿嘿嘿嘿</div>
+    <div onclick="say3()">节流测试-立即执行</div>
+    <div onclick="say4()">节流测试-延时执行</div>
+
+    <script>
+      function debounce(cb, timeout = 200) {
+        let timer = null;
+        return function (...args) {
+          const ctx = this;
+          if (timer) {
+            clearTimeout(timer);
+            timer = null;
+          }
+          timer = setTimeout(() => {
+            cb.apply(ctx, args);
+            clearTimeout(timer);
+            timer = null;
+          }, timeout);
+        };
+      }
+
+      function _say() {
+        console.log("hello , hi");
+      }
+
+      let say = debounce(_say, 200);
+
+      function debounceNow(cb, timeout = 200) {
+        let timer = null;
+        return function (...args) {
+          const ctx = this;
+          if (timer) {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+              cb.apply(ctx, args);
+              clearTimeout(timer);
+              timer = null;
+            }, timeout);
+          } else {
+            cb.apply(ctx, args);
+            timer = setTimeout(() => {
+              clearTimeout(timer);
+              timer = null;
+            }, timeout);
+          }
+        };
+      }
+      function _say2() {
+        console.log("heiheiheiheiehie");
+      }
+      var say2 = debounceNow(_say2, 600);
+
+      /** 节流测试 */
+      function throttleNow(cb, timeout = 300) {
+        let timer = null;
+        return function (...args) {
+          const ctx = this;
+          if (!timer) {
+            cb.apply(ctx, args);
+            timer = setTimeout(() => {
+              clearInterval(timer);
+              timer = null;
+            }, timeout);
+          }
+        };
+      }
+      function _say3() {
+        console.log("节流测试-立即执行");
+      }
+      var say3 = throttleNow(_say3, 800);
+
+      function throttle(cb, timeout = 300) {
+        let timer = null;
+        return function (...args) {
+          const ctx = this;
+          if (!timer) {
+            timer = setTimeout(() => {
+              cb.apply(ctx, args);
+              clearInterval(timer);
+              timer = null;
+            }, timeout);
+          }
+        };
+      }
+      function _say4() {
+        console.log("节流测试-延时执行");
+      }
+      var say4 = throttle(_say4, 800);
+    </script>
+  </body>
+</html>
