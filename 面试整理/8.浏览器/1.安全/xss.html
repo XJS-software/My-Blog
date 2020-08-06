@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="d">
+    hello
+  </div>
+  <script>
+    var d = document.getElementById('d')
+    const str1 = '<script>say(1)<\/script>'
+    const str2 = '<script src="./xss.js" type="text/javascript">'
+    d.innerText = str1
+    document.write(str2)
+    function say(w){
+      alert(w)
+    }
+    // d.innerHTML = str2 
+  </script>
+</body>
+</html>
