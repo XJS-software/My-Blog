@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * 请在 sum函数中调用此函数，完成数值计算
+     * @param {*} a 要相加的第一个值
+     * @param {*} b 要相加的第二个值
+     * @param {*} callback 相加之后的回调函数
+     */
+    function asyncAdd(a,b,callback) {
+      setTimeout(function(){
+      callback(null, a+b)
+      },1000)
+    }
+
+    /**
+     * 请在此方法中调用asyncAdd方法，完成数值计算
+     * @param  {...any} rest 传入的参数
+     */
+    async function sum(...rest) {
+      // 请在此处完善代码
+      if(rest.length === 1) return Promise.resolve(rest[0])
+      if(rest.length % 2 === 1) rest.push(0)
+      let temp = []
+      while(rest.length >0){
+        var t = []
+        for(let i=0;i<2;i++){
+          t.push(rest.shift())
+        }
+        temp.push(t)
+      }
+      var p = temp.map(item=>{
+        return new Promise((resolve,reject)=>{
+        asyncAdd(...item,(_,res)=>{
+            resolve(res)
+          })
+        })
+      })
+      return Promise.all(p).then(res=>{
+        return sum(...res)
+      })
+    }
+
+    // var start = window.performance.now()
+    // sum(1, 2, 3, 4, 5, 6).then(res => {
+    //   // 请保证在调用sum方法之后，返回结果: 21
+    //   console.log(res)
+    //   console.log(`程序执行共耗时: ${window.performance.now() - start}`)
+    // })
+
+    /**
+     * 请在此方法中调用asyncAdd方法，完成数值计算
+     * @param  {...any} rest 传入的参数
+     */
+     async function sum2(...rest) {
+      // 请在此处完善代码
+      let total = 0
+      const o = {
+        toString: ()=>{
+          return total
+        }
+      }
+
+      let promises = []
+      for(var i=0;i<rest.length;i++){
+        let p = new Promise((resolve)=>{
+          asyncAdd(o,rest[i],(_,res)=>{
+            total = res
+            resolve()
+          })
+        })
+        promises.push(p)
+      }
+      return Promise.all(promises).then(()=>{
+        return total
+      })
+    }
+
+    var start = window.performance.now()
+    sum2(1, 2, 3, 4, 5, 6).then(res => {
+      // 请保证在调用sum方法之后，返回结果: 21
+      console.log(res)
+      console.log(`程序执行共耗时: ${window.performance.now() - start}`)
+    })
+
+
+  </script>
+</body>
+</html>
