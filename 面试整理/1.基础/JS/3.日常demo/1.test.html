@@ -83,9 +83,31 @@
     }
 
     var start = window.performance.now()
-    sum2(1, 2, 3, 4, 5, 6).then(res => {
+    // sum2(1, 2, 3, 4, 5, 6).then(res => {
+    //   // 请保证在调用sum方法之后，返回结果: 21
+    //   console.log(res)
+    //   console.log(`程序执行共耗时: ${window.performance.now() - start}`)
+    // })
+
+    /**
+     * 请在此方法中调用asyncAdd方法，完成数值计算
+     * @param  {...any} rest 传入的参数
+     */
+    async function sum3(...rest) {
+      rest.toString = function(){
+        return this.join('+')
+      }
+      return new Promise((resolve)=>{
+        asyncAdd('',rest,(_,res)=>{
+          resolve(eval(res))
+        })
+      }) 
+    }
+
+    var start = window.performance.now()
+    sum3(1, 2, 3, 4, 5, 6).then(res => {
       // 请保证在调用sum方法之后，返回结果: 21
-      console.log(res)
+      console.log('res3: ' + res)
       console.log(`程序执行共耗时: ${window.performance.now() - start}`)
     })
 
