@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img{
+      display: block;
+      width: 200px;
+      height: 100px;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <img class="img" alt="img" src="" data-src="../imgs/1.jpg"></img>
+    <img class="img" alt="img" src="" data-src="../imgs/2.jpg"></img>
+    <img class="img" alt="img" src="" data-src="../imgs/3.jpg"></img>
+    <img class="img" alt="img"  src="" data-src="../imgs/4.jpg"></img>
+    <img class="img" alt="img"  src="" data-src="../imgs/5.jpg"></img>
+    <img class="img" alt="img"  src="" data-src="../imgs/6.jpg"></img>
+    <img class="img" alt="img"  src="" data-src="../imgs/7.jpg"></img>
+    <img class="img" alt="img"  src="" data-src="../imgs/8.jpg"></img>
+    <img class="img" alt="img"  src="" data-src="../imgs/9.jpg"></img>
+    <img class="img" alt="img"  src="" data-src="../imgs/10.jpg"></img>
+    <img class="img" alt="img"  src="" data-src="../imgs/11.jpg"></img>
+  </div>
+
+</body>
+<script>
+  /** 
+   * lazy-load 的实现原理
+   * 
+   * 1. 获取当前视窗高度
+   * 2. 获取图片离视窗顶部距离，判断是否需要加载
+   * 3. 将图片 src 替换为真正的图片 src，data-src
+   */
+
+  /** 
+   * 关键点：
+   * 1. innerHeight 的获取及兼容
+   * 2. 图片离视窗顶部距离获取及兼容
+   *    Element.getBoundingClientRect()  
+   *    MDN: https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect
+   * 3. data-src 的操作
+   */
+
+  /** TODO: 优化函数 */
+
+  let imgs = document.getElementsByTagName('img')
+  let viewHeight = window.innerHeight || document.documentElement.clientHeight
+  let num = 0
+  function lazyLoadImg(){
+    for(let i=0;i<imgs.length;i++){
+      let rect = imgs[i].getBoundingClientRect()
+      console.log('rect: ', rect);
+      let src = imgs[i].getAttribute('data-src')
+      if(rect.top < viewHeight){
+        imgs[i].src = src
+      }
+    }
+  }
+
+  document.addEventListener('scroll',lazyLoadImg)
+</script>
+</html>
