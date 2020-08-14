@@ -3,3 +3,4 @@ ignore.txt
 
 /node_modules
 
+**/node_modules
