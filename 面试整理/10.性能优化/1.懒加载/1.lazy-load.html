@@ -7,25 +7,25 @@
   <style>
     img{
       display: block;
-      width: 200px;
-      height: 100px;
+      width: 400px;
+      height: 200px;
       margin: 20px;
     }
   </style>
 </head>
 <body>
   <div>
-    <img class="img" alt="img" src="" data-src="../imgs/1.jpg"></img>
-    <img class="img" alt="img" src="" data-src="../imgs/2.jpg"></img>
-    <img class="img" alt="img" src="" data-src="../imgs/3.jpg"></img>
-    <img class="img" alt="img"  src="" data-src="../imgs/4.jpg"></img>
-    <img class="img" alt="img"  src="" data-src="../imgs/5.jpg"></img>
-    <img class="img" alt="img"  src="" data-src="../imgs/6.jpg"></img>
-    <img class="img" alt="img"  src="" data-src="../imgs/7.jpg"></img>
-    <img class="img" alt="img"  src="" data-src="../imgs/8.jpg"></img>
-    <img class="img" alt="img"  src="" data-src="../imgs/9.jpg"></img>
-    <img class="img" alt="img"  src="" data-src="../imgs/10.jpg"></img>
-    <img class="img" alt="img"  src="" data-src="../imgs/11.jpg"></img>
+    <img class="img" alt="img" src="" lazy-load="true" data-src="../imgs/1.jpg"></img>
+    <img class="img" alt="img" src="" lazy-load="true" data-src="../imgs/2.jpg"></img>
+    <img class="img" alt="img" src="" lazy-load="true" data-src="../imgs/3.jpg"></img>
+    <img class="img" alt="img"  src="" lazy-load="true" data-src="../imgs/4.jpg"></img>
+    <img class="img" alt="img"  src="" lazy-load="true" data-src="../imgs/5.jpg"></img>
+    <img class="img" alt="img"  src="" lazy-load="true" data-src="../imgs/6.jpg"></img>
+    <img class="img" alt="img"  src="" lazy-load="true" data-src="../imgs/7.jpg"></img>
+    <img class="img" alt="img"  src="" lazy-load="true" data-src="../imgs/8.jpg"></img>
+    <img class="img" alt="img"  src="" lazy-load="true" data-src="../imgs/9.jpg"></img>
+    <img class="img" alt="img"  src="" lazy-load="true" data-src="../imgs/10.jpg"></img>
+    <img class="img" alt="img"  src="" lazy-load="true" data-src="../imgs/11.jpg"></img>
   </div>
 
 </body>
@@ -48,21 +48,39 @@
    */
 
   /** TODO: 优化函数 */
+  /** DONE: 新增节流 */
 
-  let imgs = document.getElementsByTagName('img')
-  let viewHeight = window.innerHeight || document.documentElement.clientHeight
-  let num = 0
-  function lazyLoadImg(){
-    for(let i=0;i<imgs.length;i++){
-      let rect = imgs[i].getBoundingClientRect()
-      console.log('rect: ', rect);
-      let src = imgs[i].getAttribute('data-src')
-      if(rect.top < viewHeight){
-        imgs[i].src = src
+  const viewHeight = window.innerHeight || document.documentElement.clientHeight
+  const imgs = document.querySelectorAll('img[data-src][lazy-load]')
+
+  function lazyLoad(){
+    Array.prototype.forEach.call(imgs,function(ele){
+      const src = ele.getAttribute('data-src')
+      const imgSrc = ele.getAttribute('src')
+      if(!src || imgSrc) return
+      const {top} = ele.getBoundingClientRect()
+      if(top < viewHeight + 50){
+        ele.src = src
+      }
+    })
+  }
+
+  function throttle(cb,timeout=200){
+    let timer = null 
+    return function(...args){
+      if(!timer){
+        cb.apply(this,args)
+        timer = setTimeout(() => {
+          cb.apply(this,args)
+          clearTimeout(timer)
+          timer = null 
+        }, timeout);
       }
     }
   }
 
-  document.addEventListener('scroll',lazyLoadImg)
+  document.addEventListener('scroll',throttle(lazyLoad))
+
+
 </script>
 </html>
