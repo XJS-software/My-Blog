@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    a{
+      margin: 0 20px;
+    }
+    #router-view{
+      border: 1px solid red;
+      margin: 20px 0;
+      height: 80px;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#hash-1">hash-1</a>
+  <a href="#hash-2">hash-2</a>
+  <a href="#hash-3">hash-3</a>
+  <a href="#hash-4">hash-4</a>
+  <a href="#not-found">not found page</a>
+
+  <button onclick="goSomeWhere()">去往不存在的 hash</button>
+
+  <div id="router-view"></div>
+
+  <script>
+    function getHash(){
+      let hash = window.location.hash
+    }
+    const routerView = document.getElementById('router-view')
+
+    class HashRouter{
+      constructor(){
+        this.router = {}
+        window.addEventListener('hashchange',()=>{this.handleHashChange()})
+      }
+      init(){
+        this.handleHashChange()
+      }
+      register(hash,cb){
+        this.router[hash] = cb
+      }
+      handleHashChange(){
+        const hash = this.getHash()
+        let cb = this.router[hash]
+        if(cb){
+          cb()
+        }else{
+          try{
+            this.router['/not-found']()
+          }
+          catch(e){
+            console.log('e: ', e);
+          }
+        }
+      }
+      push(hash){
+        window.location.hash = hash
+      }
+      routerEnter(){}
+      routerLeave(){}
+      getHash(){
+        let hash = window.location.hash || ''
+        hash = hash.split('#')[1]
+        return hash ? '/' + hash : '/'
+      }
+    }
+
+    const router = new HashRouter()
+    router.register('/',()=>routerView.innerText='我是首页')
+    router.register('/hash-1',()=>routerView.innerText='我是 /hash-1')
+    router.register('/hash-2',()=>routerView.innerText='我是 /hash-2')
+    router.register('/hash-3',()=>routerView.innerText='我是 /hash-3')
+    router.register('/hash-4',()=>routerView.innerText='我是 /hash-4')
+    router.register('/not-found',()=>routerView.innerText='我是 not-found')
+
+    router.init()
+
+    function goSomeWhere(){
+      router.push('/unknown')
+    }
+
+  </script>
+</body>
+</html>

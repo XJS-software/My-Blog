@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    a{
+      margin: 0 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#hash-1">hash-1</a>
+  <a href="#hash-2">hash-2</a>
+  <a href="#hash-3">hash-3</a>
+  <a href="#hash-4">hash-4</a>
+
+  <button onclick="getHash()">获取当前hash</button>
+
+  <script>
+    function getHash(){
+      let hash = window.location.hash
+      console.log('hash: ', hash);
+    }
+
+    window.addEventListener('hashchange',function(e){
+      const {newURL,oldURL} = e
+      console.log('newURL,oldURL: ', newURL,oldURL);
+    })
+
+  </script>
+</body>
+</html>
