@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    a{
+      margin: 0 20px;
+    }
+    #router-view{
+      border: 1px solid red;
+      height: 80px;
+    }
+  </style>
+</head>
+<body>
+  <a onclick="naviTo('/router-1')">router-1</a>
+  <a onclick="naviTo('/router-2')">router-2</a>
+  <a href="#router-3">router-3</a>
+  <a onclick="naviTo('/not-found')">not-found</a>
+
+
+  <button onclick="router.go(-1)">back</button>
+
+  <div id="router-view"></div>
+
+  <script>
+
+    const routerView = document.getElementById('router-view')
+
+    class HistoryRouter{
+      constructor(){
+        this.router = {}
+        this.listenPopState()
+      }
+      listenPopState(){
+        window.addEventListener('popstate',()=>{
+          this.handlePathChange()
+        })
+      }
+      load(){
+        this.handlePathChange()
+      }
+      register(routerList){
+        routerList.forEach(item=>{
+          const {path,resolve} = item
+          this.router[path] = resolve
+        })
+      }
+      handlePathChange(){
+        const path = window.location.pathname || '/'
+        let cb = this.router[path] 
+        if(cb) cb()
+        else {
+          try{
+            this.router['/not-found']()
+          }
+          catch(err){
+            console.log('err: ', err);
+          }
+        }
+      }
+      push(path){
+        history.pushState({},null,path)
+        this.handlePathChange()
+      }
+      replace(path){
+        history.replaceState({},null,path)
+        this.handlePathChange()
+      }
+      go(num=0){
+        history.go(num)
+      }
+    }
+
+    const router = new HistoryRouter()
+
+    const routerList = [
+      {
+        path: '/',
+        resolve(){
+          routerView.innerText = '我是首页'
+        }
+      },
+      {
+        path: '/router-1',
+        resolve(){
+          routerView.innerText = '我是router-1'
+        }
+      },
+      {
+        path: '/router-2',
+        resolve(){
+          routerView.innerText = '我是router-2'
+        }
+      },
+      {
+        path: '/not-found',
+        resolve(){
+          routerView.innerText = '我是not-found'
+        }
+      },
+    ]
+    router.register(routerList)
+      
+    router.load()
+
+    function naviTo(to){
+      router.push(to)
+    }
+
+    
+  </script>
+</body>
+</html>

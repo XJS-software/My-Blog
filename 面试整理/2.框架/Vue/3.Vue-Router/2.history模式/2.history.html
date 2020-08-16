@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    a{
+      margin: 0 20px;
+    }
+    #router-view{
+      border: 1px solid red;
+      height: 80px;
+    }
+  </style>
+</head>
+<body>
+  <a onclick="naviTo('/router-1')">router-1</a>
+  <a onclick="naviTo('/router-2')">router-2</a>
+  <a href="#router-3">router-3</a>
+  <a onclick="naviTo('/not-found')">not-found</a>
+
+
+  <button onclick="history.go(-1)">back</button>
+
+  <div id="router-view"></div>
+
+  <script>
+    window.addEventListener('popstate',function(e){
+      console.log('-- e: ', e);
+    })
+
+    function naviTo(to){
+      history.pushState({},null,to)
+    }
+
+    
+  </script>
+</body>
+</html>
