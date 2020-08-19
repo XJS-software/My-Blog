@@ -1,7 +1,7 @@
 /** 
  * 冒泡排序
  * 两两比较，大者沉底
- * 外层循环控制循环次数，即 length - 1 此循环即可
+ * 外层循环控制循环次数，即 length - 1 次循环即可
  * 内层循环每次可以获取一个最大值
  * 
  * 稳定排序
@@ -110,9 +110,29 @@ const testQuickArr = [...ary]
 quickSort(testQuickArr,0,testQuickArr.length-1)
 console.log('testQuickArr: ', testQuickArr);
 
+/** 
+ * 快排 - 2
+ * 利用递归
+ */
+function quickSort2(arr){
+  let len = arr.length
+  if(len <= 1) return arr
+  let left = []
+  let right = []
+  const base = arr[0]
+  for(let i=1;i<len;i++){
+    if(arr[i] <= base){
+      left.push(arr[i])
+    }else{
+      right.push(arr[i])
+    }
+  }
+  return [...quickSort2(left),base,...quickSort2(right)]
+}
 
-
-
+var arr2 = [1,4,2,5,7,3,1,2,0,-1,9,6]
+// var res2 = quickSort2(arr2)
+// console.log('res2: ', res2);
 
 /** 
  * 插冒归基稳定，快选堆希不稳定
