@@ -1,3 +1,3 @@
 # My-Blog
-recording my web project and knoledge of web.
+recording my web project and knowledgeof web.
 ------
