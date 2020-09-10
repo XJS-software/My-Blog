@@ -11,3 +11,5 @@ const haha: ITest = {
     prop1: false,
     prop2: true
 }
+
+type tt = (keyof some )[]  
