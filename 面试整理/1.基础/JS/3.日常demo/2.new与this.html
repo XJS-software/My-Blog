@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /** 
+         * 测试 new 与 8 种函数相结合的结果
+         */
+
+        function foo1(){}
+        var res1 = new foo1()
+
+        const foo2 = ()=>{}
+        // var res2 = new foo2()  // Uncaught TypeError: foo2 is not a constructor
+
+        const obj = {
+            foo3: function(){}
+        }
+        var res3 = new obj.foo3()
+
+        class Fun{
+            foo(){}
+        }
+        const f = new Fun()
+        // const res31 = new (f.foo)() // Uncaught TypeError: f.foo is not a constructor
+
+        /** 类 本质也是函数 */
+        class foo4 {}
+        var res4 = new foo4()
+
+        function* foo5(){}
+        // var res5 = new foo5() //  Uncaught TypeError: foo5 is not a constructor
+
+        async function foo6(){}
+        // var res6 = new foo6() // Uncaught TypeError: foo6 is not a constructor
+
+        const foo7 =  async ()=>{}
+        // var res7 = new foo7() // Uncaught TypeError: foo7 is not a constructor
+
+        async function* foo8(){}
+        // var res8 = new foo8() // Uncaught TypeError: foo8 is not a constructor
+
+
+
+
+    </script>
+</body>
+</html>
+
