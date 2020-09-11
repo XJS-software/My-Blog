@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #circle{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 1px solid black;
+            margin: 20px auto;
+        }
+        .red{
+            background-color: red;
+        }
+        .yellow{
+            background-color: yellow;
+        }
+        .green{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="circle"></div>
+    <script>
+        /** 
+         * 实现一个红绿灯，
+         * 把一个圆形 div 按照绿色 3 秒，黄色 1 秒，红色 2 秒循环改变背景色，
+         */
+
+        const circle = document.getElementById('circle')
+
+        function sleep(time){
+            return new Promise((resolve)=>{
+                setTimeout(resolve,time)
+            })
+        }
+
+        function light(color){
+            circle.className = color
+        }
+        
+        async function setLight(time,color){
+            light(color)
+            await sleep(time)
+        }
+
+        async function showLight(){
+            await setLight(3000,'green')
+            await setLight(2000,'yellow')
+            await setLight(1000,'red')
+            showLight()
+        }
+        
+        showLight()
+
+    </script>
+</body>
+</html>
