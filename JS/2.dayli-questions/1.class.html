@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /** 
+         * class 
+         * 
+         * static 定义静态属性和方法 - 即 类 自身的属性和方法
+         *        需要与原型属性和方法区分开来
+         * 
+         * getter 与 setter 会被当做属性来用
+         * get    定义 getter 
+         * set    定义 setter 
+         */
+
+        class Foo{
+            static name = 'Foo class'
+            static sayName = function(){
+                console.log('++ myName is: ++', Foo.name);
+            }
+            constructor(name) {
+                this.name = name
+            }
+            sayName(){
+                console.log('this.name: ', this.name);                
+            }
+
+            get myName(){
+                return this.name
+            }
+            set myName(name){
+                this.name = name
+            }
+        }
+
+        let foo = new Foo('I am foo')
+        foo.sayName()
+        console.log('foo.myName: ', foo.myName);
+
+        foo.myName = 'updated name'
+        console.log('foo.myName : ', foo.myName );
+
+        Foo.sayName()
+    </script>
+</body>
+</html>
