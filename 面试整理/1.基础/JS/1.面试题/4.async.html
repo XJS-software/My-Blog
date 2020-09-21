@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /** 
+          问题：async 函数返回值一定是 promisfy 的吗？
+
+          结论：由如下函数返回结果，可以其返回结果是 promise
+         */
+        async function foo(){
+          return 1
+        }
+
+        async function bar(){}
+
+        const resFoo = foo()
+        resFoo.then(res => {
+          console.log('res: ', res);  // 1
+        })
+
+        const resBar = bar()
+        resBar.then(res=>{
+          console.log('res: ', res);  // undefined
+        })
+
+        async function test(){
+          const res = await foo()
+          console.log('res: ', res);  // 1
+        }
+        test()
+    </script>
+</body>
+</html>
