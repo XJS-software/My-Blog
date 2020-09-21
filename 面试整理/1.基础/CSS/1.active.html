@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div:active{
+            color: red;
+        }
+        .a:active{
+            color: red;
+        }
+        .button:active{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        :active 伪类的生效方式 - https://developer.mozilla.org/zh-CN/docs/Web/CSS/:active
+                 1. div / a / button 都生效
+                 2. 点击时激活了 :active 属性
+                 3. 可匹配到用户点击到的元素
+                 4. 当有鼠标交互时，代表的是用户按下按键和松开按键之间的时间
+    -->
+
+    <div class="div">I am div</div>
+    <br/>
+    <a href="#" class="a">I am a-link</a>
+    <br/>
+    <button class="button">I am button</button>
+</body>
+</html>
