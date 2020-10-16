@@ -1,3 +1,6 @@
-(function(){
-    console.log('++ say.js is run ++', );
-})()
+define(['./names','./getName'],function(names,getName){
+    return {
+        names,
+        getName
+    }
+})

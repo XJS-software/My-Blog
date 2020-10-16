@@ -1,3 +1,4 @@
-(function(){
-    console.log('++ add.js is run ++', );
-})()
+define({
+    name: 'xjs',
+    age: 22,
+})
