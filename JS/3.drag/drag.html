@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .p{
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 400px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+            background-color: aliceblue;
+            border: 1px solid green;
+            cursor: move;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="p" onmousedown="drag(this, event)">you can drag me now</div>
+
+    <script src='./drag.js'></script>
+
+</body>
+</html>
