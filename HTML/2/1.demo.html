@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /** 
+         * 通过 debugger
+         * 打开开发者工具后 debugger 会生效
+         *  */        
+        
+        setInterval(() => {
+            let start = Date.now()
+            debugger
+            let end = Date.now()
+            let time = end - start
+            console.log('time: ', time);
+        }, 300);
+
+    </script>
+</body>
+</html>
