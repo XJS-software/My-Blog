@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /** 
+         * devtools 打开后页面尺寸会发生变化
+         * 
+         * 检测页面的 outerWidht - innerWidth | outerHeight - innerHeight
+         */
+        const threshold = 200
+        let isOpen = false
+
+        function detect(){
+            const {innerHeight,innerWidth,outerHeight,outerWidth} = window
+            const horizontalDis = outerWidth - innerWidth
+            const verticalDis = outerHeight - innerHeight
+            if(horizontalDis > threshold || verticalDis > threshold){
+                !isOpen && window.dispatchEvent(new CustomEvent('devtoolsopen', {detail : {isOpen: true}}))
+                isOpen = true
+            }else{
+                isOpen = false
+            }
+        }
+
+        window.addEventListener('devtoolsopen',function(e){
+            console.log('devtools is opne', e.detail);
+        })
+
+        setInterval(() => {
+            detect()
+        }, 500);
+
+    </script>
+</body>
+</html>
