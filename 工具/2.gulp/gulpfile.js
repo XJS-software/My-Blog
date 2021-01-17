@@ -5,58 +5,60 @@ const uglify = require('gulp-uglify')
 const {pipeline} = require('readable-stream')
 
 const less = require('gulp-less')
+const base64 = require('gulp-base64')
+const connect = require('gulp-connect')
 
 const {series,parallel,watch} = gulp
 const jsDest = 'src/**/*.js'
 const cssDest = 'src/**/*.less'
+const htmlDest = 'src/**/*.html'
 
 function clean(){
     return del(['./dist'])
 }
 
-function getStream(){
-    return gulp.src(jsDest)
-}
-
-function jsTranspile(){
-    return  babel({
-                presets: ['@babel/env']
-            })           
-}
-
-function jsUglify(){
-    return uglify()
-}
-
-function output(){
-    return gulp.dest('./dist/static')
-}
-
 function jsTask(){
-    return pipeline(
-        getStream(),
-        jsTranspile(),
-        jsUglify(), 
-        output() 
-    )
+    return gulp.src(jsDest).
+        pipe(
+            babel({
+                presets: ['@babel/env']
+            })
+        ). 
+        // pipe(uglify()).
+        pipe(gulp.dest('./dist/static'))
 }
 
 function cssTask(){
-    return pipeline(
-        gulp.src(cssDest),
-        less({
-        }),
-        gulp.dest('./dist/static')
-    )
+    return gulp.src(cssDest).
+        pipe(less()). 
+        pipe(base64()).
+        pipe(gulp.dest('./dist/static'))
+
+}
+
+function htmlTast(){
+    return gulp.src(htmlDest).
+        pipe(gulp.dest('./dist'))
+}
+
+function server(){
+    return connect.server({
+        port: 8800,
+        root: 'dist',
+        livereload: true
+    })
 }
 
 watch([jsDest], function(){
-    return jsTask()    
+    return jsTask().pipe(connect.reload())
 })
 
 watch([cssDest], function(){
-    return cssTask()
+    return cssTask().pipe(connect.reload())
 })
 
+watch([htmlDest], function(){
+    return htmlTast().pipe(connect.reload())
+})
 
-exports.default = series(clean, parallel(jsTask, cssTask))
+exports.default = series(clean, parallel(jsTask, cssTask, htmlTast), server)

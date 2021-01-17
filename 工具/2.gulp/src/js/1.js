@@ -12,7 +12,6 @@ class Person {
 }
 
 const p = new Person('Bobe', 12) 
-
 export {
     p,
     str
