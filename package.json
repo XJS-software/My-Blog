@@ -15,10 +15,15 @@
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
+    "glob": "^7.1.6",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.7.0"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "core-js": "^3.8.3",
+    "gulp": "^4.0.2",
     "gulp-base64": "^0.1.3"
   }
 }
